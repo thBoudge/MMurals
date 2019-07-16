@@ -16,8 +16,22 @@
 		140D44D022D940830057F434 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44CF22D940830057F434 /* ApiKeys.swift */; };
 		140D44D222D9426F0057F434 /* MuralsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44D122D9426F0057F434 /* MuralsService.swift */; };
 		1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B8FD22DE28D80073A8D2 /* Mural.swift */; };
+		1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */; };
+		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
+		1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */; };
+		1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */; };
 		BD891F4AC5A82E894546F928 /* Pods_MMurals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47708D128264C30E324FDF57 /* Pods_MMurals.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1437B90922DE355E0073A8D2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 140D44A922D9390B0057F434 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 140D44B022D9390B0057F434;
+			remoteInfo = MMurals;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		12B315FC2D7961E4499C7684 /* Pods-MMurals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.debug.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.debug.xcconfig"; sourceTree = "<group>"; };
@@ -32,6 +46,12 @@
 		140D44CF22D940830057F434 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		140D44D122D9426F0057F434 /* MuralsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsService.swift; sourceTree = "<group>"; };
 		1437B8FD22DE28D80073A8D2 /* Mural.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mural.swift; sourceTree = "<group>"; };
+		1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMuralsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1437B90822DE355E0073A8D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSessionFake.swift; sourceTree = "<group>"; };
+		1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MontrealPublicMurals.json; sourceTree = "<group>"; };
+		1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMuralsResponseData.swift; sourceTree = "<group>"; };
+		1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsServiceTests.swift; sourceTree = "<group>"; };
 		47708D128264C30E324FDF57 /* Pods_MMurals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MMurals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BD27500672BDF17693901C /* Pods-MMurals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.release.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -45,6 +65,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1437B90122DE355E0073A8D2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -52,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				140D44B322D9390B0057F434 /* MMurals */,
+				1437B90522DE355E0073A8D2 /* MMuralsTests */,
 				140D44B222D9390B0057F434 /* Products */,
 				D1D7FDBD46456036DE540811 /* Pods */,
 				5241C526569D43AC18153ECD /* Frameworks */,
@@ -62,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				140D44B122D9390B0057F434 /* MMurals.app */,
+				1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +160,18 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		1437B90522DE355E0073A8D2 /* MMuralsTests */ = {
+			isa = PBXGroup;
+			children = (
+				1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */,
+				1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */,
+				1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */,
+				1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */,
+				1437B90822DE355E0073A8D2 /* Info.plist */,
+			);
+			path = MMuralsTests;
+			sourceTree = "<group>";
+		};
 		5241C526569D43AC18153ECD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -170,6 +211,24 @@
 			productReference = 140D44B122D9390B0057F434 /* MMurals.app */;
 			productType = "com.apple.product-type.application";
 		};
+		1437B90322DE355E0073A8D2 /* MMuralsTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1437B90B22DE355E0073A8D2 /* Build configuration list for PBXNativeTarget "MMuralsTests" */;
+			buildPhases = (
+				1437B90022DE355E0073A8D2 /* Sources */,
+				1437B90122DE355E0073A8D2 /* Frameworks */,
+				1437B90222DE355E0073A8D2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1437B90A22DE355E0073A8D2 /* PBXTargetDependency */,
+			);
+			name = MMuralsTests;
+			productName = MMuralsTests;
+			productReference = 1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -182,6 +241,11 @@
 				TargetAttributes = {
 					140D44B022D9390B0057F434 = {
 						CreatedOnToolsVersion = 10.2.1;
+					};
+					1437B90322DE355E0073A8D2 = {
+						CreatedOnToolsVersion = 10.2.1;
+						LastSwiftMigration = 1020;
+						TestTargetID = 140D44B022D9390B0057F434;
 					};
 				};
 			};
@@ -199,6 +263,7 @@
 			projectRoot = "";
 			targets = (
 				140D44B022D9390B0057F434 /* MMurals */,
+				1437B90322DE355E0073A8D2 /* MMuralsTests */,
 			);
 		};
 /* End PBXProject section */
@@ -212,6 +277,14 @@
 				140D44CE22D9407B0057F434 /* ApiKeys.plist in Resources */,
 				140D44BC22D9390C0057F434 /* Assets.xcassets in Resources */,
 				140D44BA22D9390B0057F434 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1437B90222DE355E0073A8D2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +352,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		1437B90022DE355E0073A8D2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */,
+				1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */,
+				1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1437B90A22DE355E0073A8D2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 140D44B022D9390B0057F434 /* MMurals */;
+			targetProxy = 1437B90922DE355E0073A8D2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		140D44B822D9390B0057F434 /* Main.storyboard */ = {
@@ -455,6 +546,49 @@
 			};
 			name = Release;
 		};
+		1437B90C22DE355E0073A8D2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
+				INFOPLIST_FILE = MMuralsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.MMuralsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MMurals.app/MMurals";
+			};
+			name = Debug;
+		};
+		1437B90D22DE355E0073A8D2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
+				INFOPLIST_FILE = MMuralsTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.MMuralsTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MMurals.app/MMurals";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -472,6 +606,15 @@
 			buildConfigurations = (
 				140D44C422D9390C0057F434 /* Debug */,
 				140D44C522D9390C0057F434 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1437B90B22DE355E0073A8D2 /* Build configuration list for PBXNativeTarget "MMuralsTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1437B90C22DE355E0073A8D2 /* Debug */,
+				1437B90D22DE355E0073A8D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

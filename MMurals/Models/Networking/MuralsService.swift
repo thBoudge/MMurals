@@ -23,7 +23,7 @@ class MuralsService {
     
     //MARK: Methods
     //Methods That called and return response
-    func getMurals(callback: @escaping (Bool, String?) -> Void) {
+    func getMurals(callback: @escaping (Bool, Mural?) -> Void) {
         
         let request = URLRequest(url: muralURL)
         
@@ -50,7 +50,7 @@ class MuralsService {
                 if let responseJSON = try? JSONDecoder().decode(Mural.self, from: data){
                     print(responseJSON)
 //                    let value = responseJSON.rates[self.symbols]
-                    guard let value = responseJSON.name else {return callback(false, nil)}
+                    let value = responseJSON 
                     callback(true,value)
 //                    print(value!)
                 }
