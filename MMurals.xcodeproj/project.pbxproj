@@ -15,6 +15,7 @@
 		140D44CE22D9407B0057F434 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 140D44CD22D9407B0057F434 /* ApiKeys.plist */; };
 		140D44D022D940830057F434 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44CF22D940830057F434 /* ApiKeys.swift */; };
 		140D44D222D9426F0057F434 /* MuralsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44D122D9426F0057F434 /* MuralsService.swift */; };
+		1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411AE1622DF79C400FD9537 /* MuralRealm.swift */; };
 		1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B8FD22DE28D80073A8D2 /* Mural.swift */; };
 		1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */; };
 		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
@@ -45,6 +46,7 @@
 		140D44CD22D9407B0057F434 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		140D44CF22D940830057F434 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		140D44D122D9426F0057F434 /* MuralsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsService.swift; sourceTree = "<group>"; };
+		1411AE1622DF79C400FD9537 /* MuralRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealm.swift; sourceTree = "<group>"; };
 		1437B8FD22DE28D80073A8D2 /* Mural.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mural.swift; sourceTree = "<group>"; };
 		1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMuralsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437B90822DE355E0073A8D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				1437B8FF22DE34330073A8D2 /* Networking */,
+				1411AE1622DF79C400FD9537 /* MuralRealm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				140D44D022D940830057F434 /* ApiKeys.swift in Sources */,
 				140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */,
 				1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */,
+				1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

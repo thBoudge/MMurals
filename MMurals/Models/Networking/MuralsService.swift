@@ -27,7 +27,7 @@ class MuralsService {
         
         let request = URLRequest(url: muralURL)
         
-        print(request)
+//        print(request)
         
         task?.cancel()
         
@@ -48,7 +48,7 @@ class MuralsService {
                 
                 // MARK: - 5 Translation JSON in String
                 if let responseJSON = try? JSONDecoder().decode(Mural.self, from: data){
-                    print(responseJSON)
+//                    print(responseJSON)
 //                    let value = responseJSON.rates[self.symbols]
                     let value = responseJSON 
                     callback(true,value)
