@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44B422D9390B0057F434 /* AppDelegate.swift */; };
-		140D44B722D9390B0057F434 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44B622D9390B0057F434 /* ViewController.swift */; };
 		140D44BA22D9390B0057F434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140D44B822D9390B0057F434 /* Main.storyboard */; };
 		140D44BC22D9390C0057F434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140D44BB22D9390C0057F434 /* Assets.xcassets */; };
 		140D44BF22D9390C0057F434 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140D44BD22D9390C0057F434 /* LaunchScreen.storyboard */; };
@@ -21,6 +20,12 @@
 		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
 		1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */; };
 		1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */; };
+		14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */; };
+		14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56B22F344860006A793 /* MuralAnnotationView.swift */; };
+		14DCB56E22F348900006A793 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56D22F348900006A793 /* ClusterView.swift */; };
+		14F75BD122F231D10034D6F1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F75BD022F231D10034D6F1 /* MapViewController.swift */; };
+		14F75BD322F24A890034D6F1 /* MuralAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */; };
+		B209926BA6E737BAAF586E84 /* Pods_MMuralsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CD9654F8F72AC90E332A4C /* Pods_MMuralsTests.framework */; };
 		BD891F4AC5A82E894546F928 /* Pods_MMurals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47708D128264C30E324FDF57 /* Pods_MMurals.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +43,6 @@
 		12B315FC2D7961E4499C7684 /* Pods-MMurals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.debug.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.debug.xcconfig"; sourceTree = "<group>"; };
 		140D44B122D9390B0057F434 /* MMurals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMurals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140D44B422D9390B0057F434 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		140D44B622D9390B0057F434 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		140D44B922D9390B0057F434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		140D44BB22D9390C0057F434 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		140D44BE22D9390C0057F434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -54,8 +58,16 @@
 		1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MontrealPublicMurals.json; sourceTree = "<group>"; };
 		1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMuralsResponseData.swift; sourceTree = "<group>"; };
 		1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsServiceTests.swift; sourceTree = "<group>"; };
+		14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealmTests.swift; sourceTree = "<group>"; };
+		14DCB56B22F344860006A793 /* MuralAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationView.swift; sourceTree = "<group>"; };
+		14DCB56D22F348900006A793 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
+		14F75BD022F231D10034D6F1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotation.swift; sourceTree = "<group>"; };
 		47708D128264C30E324FDF57 /* Pods_MMurals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MMurals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BD27500672BDF17693901C /* Pods-MMurals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.release.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.release.xcconfig"; sourceTree = "<group>"; };
+		79CD9654F8F72AC90E332A4C /* Pods_MMuralsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MMuralsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8548FB1EC5393AF0B57F680F /* Pods-MMuralsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMuralsTests.debug.xcconfig"; path = "Target Support Files/Pods-MMuralsTests/Pods-MMuralsTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D4A3079474231B38D4A584C3 /* Pods-MMuralsTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMuralsTests.release.xcconfig"; path = "Target Support Files/Pods-MMuralsTests/Pods-MMuralsTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +83,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B209926BA6E737BAAF586E84 /* Pods_MMuralsTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -114,7 +127,7 @@
 		140D44C622D93DC00057F434 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				140D44B622D9390B0057F434 /* ViewController.swift */,
+				14F75BD022F231D10034D6F1 /* MapViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -124,6 +137,7 @@
 			children = (
 				1437B8FF22DE34330073A8D2 /* Networking */,
 				1411AE1622DF79C400FD9537 /* MuralRealm.swift */,
+				14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -139,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				140D44B822D9390B0057F434 /* Main.storyboard */,
+				14DCB56B22F344860006A793 /* MuralAnnotationView.swift */,
+				14DCB56D22F348900006A793 /* ClusterView.swift */,
 				140D44BD22D9390C0057F434 /* LaunchScreen.storyboard */,
 			);
 			path = Views;
@@ -166,6 +182,7 @@
 		1437B90522DE355E0073A8D2 /* MMuralsTests */ = {
 			isa = PBXGroup;
 			children = (
+				14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */,
 				1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */,
 				1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */,
 				1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */,
@@ -179,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				47708D128264C30E324FDF57 /* Pods_MMurals.framework */,
+				79CD9654F8F72AC90E332A4C /* Pods_MMuralsTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -188,6 +206,8 @@
 			children = (
 				12B315FC2D7961E4499C7684 /* Pods-MMurals.debug.xcconfig */,
 				79BD27500672BDF17693901C /* Pods-MMurals.release.xcconfig */,
+				8548FB1EC5393AF0B57F680F /* Pods-MMuralsTests.debug.xcconfig */,
+				D4A3079474231B38D4A584C3 /* Pods-MMuralsTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -218,9 +238,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1437B90B22DE355E0073A8D2 /* Build configuration list for PBXNativeTarget "MMuralsTests" */;
 			buildPhases = (
+				B923382B82B1088852925A31 /* [CP] Check Pods Manifest.lock */,
 				1437B90022DE355E0073A8D2 /* Sources */,
 				1437B90122DE355E0073A8D2 /* Frameworks */,
 				1437B90222DE355E0073A8D2 /* Resources */,
+				14D5547522E7D96600A1F2BC /* ShellScript */,
+				2A1292A0680AA570DEEF0102 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -294,6 +317,25 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		14D5547522E7D96600A1F2BC /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+
+";
+		};
 		1FD8168A6BB0FA6C0C1E2EEC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,6 +356,30 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2A1292A0680AA570DEEF0102 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MMuralsTests/Pods-MMuralsTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MMuralsTests/Pods-MMuralsTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		55C3240AE32817E356C04FBF /* [CP] Embed Pods Frameworks */ = {
@@ -340,6 +406,28 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MMurals/Pods-MMurals-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B923382B82B1088852925A31 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MMuralsTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -347,12 +435,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				140D44B722D9390B0057F434 /* ViewController.swift in Sources */,
+				14DCB56E22F348900006A793 /* ClusterView.swift in Sources */,
 				140D44D222D9426F0057F434 /* MuralsService.swift in Sources */,
 				140D44D022D940830057F434 /* ApiKeys.swift in Sources */,
 				140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */,
+				14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */,
+				14F75BD322F24A890034D6F1 /* MuralAnnotation.swift in Sources */,
 				1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */,
 				1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */,
+				14F75BD122F231D10034D6F1 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +452,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */,
+				14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */,
 				1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */,
 				1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */,
 			);
@@ -552,6 +644,7 @@
 		};
 		1437B90C22DE355E0073A8D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8548FB1EC5393AF0B57F680F /* Pods-MMuralsTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;
@@ -574,6 +667,7 @@
 		};
 		1437B90D22DE355E0073A8D2 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D4A3079474231B38D4A584C3 /* Pods-MMuralsTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ENABLE_MODULES = YES;

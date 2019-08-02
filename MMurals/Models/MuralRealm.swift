@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import MapKit
 
 class MuralRealm: Object {
     
@@ -19,24 +20,13 @@ class MuralRealm: Object {
     @objc dynamic var image : String = ""
     @objc dynamic var longitude = 0.0
     @objc dynamic var latitude = 0.0
-    let coordinate = List<Double>()
-    
-    //Mark: init
-    
-//    init(id : Int, artist : String, address : String, year: Int, image: NSData, coordinate: [Double]) {
-//        self.id = id
-//        self.artist = artist
-//        self.address = address
-//        self.year = year
-//        self.image = image
-//        self.coordinate = coordinate
-//    }
-//    
     
     
+
     
-   static func addMurals(mural: Mural){
-        let realm = try! Realm()
+    
+    static func addMurals(mural: Mural, realm : Realm = try! Realm()){
+
         
     
         guard let muralsData = mural.features else {return}
@@ -51,7 +41,6 @@ class MuralRealm: Object {
             guard let image = muralData.properties?.image else {return}
             guard let latitude = muralData.properties?.latitude else {return}
             guard let longitude = muralData.properties?.longitude else {return}
-            guard let coordinate  = muralData.geometry?.coordinates  else {return}
             
             muralToAdd.id = id
             muralToAdd.artist = artist
@@ -60,17 +49,21 @@ class MuralRealm: Object {
             muralToAdd.image = image
             muralToAdd.latitude = latitude
             muralToAdd.longitude = longitude
-            // how to use array with Realm
-            muralToAdd.coordinate.append(coordinate[0])
-            muralToAdd.coordinate.append(coordinate[1])
+            
             
             
             try! realm.write {
                 realm.add(muralToAdd)
+               
             }
+            
+            
             
         }
     
-    
+       
     }
 }
+
+
+
