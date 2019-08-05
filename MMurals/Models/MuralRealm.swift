@@ -8,7 +8,7 @@
 
 import Foundation
 import RealmSwift
-import MapKit
+//import MapKit
 
 class MuralRealm: Object {
     
