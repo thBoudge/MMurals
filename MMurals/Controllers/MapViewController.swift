@@ -15,12 +15,14 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     private let muralsService = MuralsService()
+    //       create CLLOcation
+    let montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
     
     override func viewDidLoad() {
         super.viewDidLoad()
         loadMurals()
-//       create CLLOcation
-        let montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
+
+        
         //How close we want to be
         let regionRadius: CLLocationDistance = 1000.0
         // create a region
@@ -57,6 +59,28 @@ class MapViewController: UIViewController {
             mapView.mapType = .satellite
         }
     }
+    
+    
+    @IBAction func getDirectionMap(_ sender: UIButton) {
+        
+        self.performSegue(withIdentifier: "RoutingSegue", sender: self)
+    }
+    
+    //prepare segue before to perfomr it
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! RoutingViewController
+        //we inform where we send data in other viewController
+        var points : [CLLocationCoordinate2D] = []
+        points.append(CLLocationCoordinate2D(latitude: 45.555841, longitude: -73.616364))
+        points.append(CLLocationCoordinate2D(latitude: 45.510131, longitude: -73.563033))
+        points.append(CLLocationCoordinate2D(latitude: 45.519379, longitude: -73.584781))
+        points.append(CLLocationCoordinate2D(latitude: 45.523362, longitude: -73.604375))
+        points.append(CLLocationCoordinate2D(latitude: 45.539966, longitude: -73.614816))
+        points.append(CLLocationCoordinate2D(latitude: 45.52159, longitude: -73.552993))
+        points.append(CLLocationCoordinate2D(latitude: 45.512805, longitude: -73.563467))
+        destinationVC.pointArray = points
+    }
+    
     
     private func loadMurals(){
         

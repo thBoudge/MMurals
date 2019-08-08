@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -15,14 +15,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M0q-Qo-m4i">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OXA-iE-lRC">
-                                <rect key="frame" x="124" y="619" width="127" height="29"/>
+                                <rect key="frame" x="96.5" y="520" width="127" height="29"/>
                                 <segments>
                                     <segment title="First"/>
                                     <segment title="Satellite"/>
@@ -31,14 +31,28 @@
                                     <action selector="changeMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="3S8-OU-xxp"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-XH-HHs">
+                                <rect key="frame" x="254" y="488" width="46" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="tyz-pQ-uNH"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="getDirectionMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AYI-uF-kTs"/>
+                                    <segue destination="DBl-v3-5AJ" kind="show" identifier="RoutingSegue" id="cJW-Zs-V4G"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PJM-XH-HHs" secondAttribute="trailing" constant="20" id="0St-gk-dve"/>
+                            <constraint firstItem="PJM-XH-HHs" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="OXA-iE-lRC" secondAttribute="trailing" constant="10" id="JOJ-qu-LuK"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OXA-iE-lRC" secondAttribute="bottom" constant="20" id="LQd-1y-vwC"/>
                             <constraint firstItem="M0q-Qo-m4i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Od4-Zz-mJW"/>
                             <constraint firstItem="M0q-Qo-m4i" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PLa-Yz-3gU"/>
                             <constraint firstItem="M0q-Qo-m4i" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Po0-ct-fRc"/>
                             <constraint firstItem="M0q-Qo-m4i" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gcF-3F-lie"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJM-XH-HHs" secondAttribute="bottom" constant="20" id="xsp-0D-HLS"/>
                             <constraint firstItem="OXA-iE-lRC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="yKZ-Og-jPz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -49,7 +63,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="99.400299850074973"/>
+            <point key="canvasLocation" x="135" y="99.295774647887328"/>
+        </scene>
+        <!--Routing View Controller-->
+        <scene sceneID="9RP-K6-3Vw">
+            <objects>
+                <viewController id="DBl-v3-5AJ" customClass="RoutingViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EPN-Uw-zGf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="neF-Az-lgV" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="-20" id="5G2-Xc-Kw5"/>
+                            <constraint firstItem="neF-Az-lgV" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" id="A8x-Nd-kSf"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="trailing" secondItem="neF-Az-lgV" secondAttribute="trailing" id="jfB-MV-CEY"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="neF-Az-lgV" secondAttribute="bottom" id="omw-O1-abE"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gii-Wx-WJg"/>
+                    </view>
+                    <connections>
+                        <outlet property="routingMapView" destination="neF-Az-lgV" id="S2i-xY-Noq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avF-nV-qj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1032.8" y="99.400299850074973"/>
         </scene>
     </scenes>
 </document>

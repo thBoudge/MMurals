@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14069E2122FB6E80009A413F /* DistanceLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14069E2022FB6E80009A413F /* DistanceLocation.swift */; };
 		140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44B422D9390B0057F434 /* AppDelegate.swift */; };
 		140D44BA22D9390B0057F434 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140D44B822D9390B0057F434 /* Main.storyboard */; };
 		140D44BC22D9390C0057F434 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 140D44BB22D9390C0057F434 /* Assets.xcassets */; };
@@ -15,6 +16,7 @@
 		140D44D022D940830057F434 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44CF22D940830057F434 /* ApiKeys.swift */; };
 		140D44D222D9426F0057F434 /* MuralsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44D122D9426F0057F434 /* MuralsService.swift */; };
 		1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411AE1622DF79C400FD9537 /* MuralRealm.swift */; };
+		142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FAAAB22F8D7330073A785 /* RoutingViewController.swift */; };
 		1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B8FD22DE28D80073A8D2 /* Mural.swift */; };
 		1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */; };
 		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
@@ -41,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		12B315FC2D7961E4499C7684 /* Pods-MMurals.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.debug.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.debug.xcconfig"; sourceTree = "<group>"; };
+		14069E2022FB6E80009A413F /* DistanceLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceLocation.swift; sourceTree = "<group>"; };
 		140D44B122D9390B0057F434 /* MMurals.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MMurals.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		140D44B422D9390B0057F434 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		140D44B922D9390B0057F434 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -51,6 +54,7 @@
 		140D44CF22D940830057F434 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		140D44D122D9426F0057F434 /* MuralsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsService.swift; sourceTree = "<group>"; };
 		1411AE1622DF79C400FD9537 /* MuralRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealm.swift; sourceTree = "<group>"; };
+		142FAAAB22F8D7330073A785 /* RoutingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingViewController.swift; sourceTree = "<group>"; };
 		1437B8FD22DE28D80073A8D2 /* Mural.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mural.swift; sourceTree = "<group>"; };
 		1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMuralsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437B90822DE355E0073A8D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				14F75BD022F231D10034D6F1 /* MapViewController.swift */,
+				142FAAAB22F8D7330073A785 /* RoutingViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -138,6 +143,7 @@
 				1437B8FF22DE34330073A8D2 /* Networking */,
 				1411AE1622DF79C400FD9537 /* MuralRealm.swift */,
 				14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */,
+				14069E2022FB6E80009A413F /* DistanceLocation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -436,8 +442,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				14DCB56E22F348900006A793 /* ClusterView.swift in Sources */,
+				14069E2122FB6E80009A413F /* DistanceLocation.swift in Sources */,
 				140D44D222D9426F0057F434 /* MuralsService.swift in Sources */,
 				140D44D022D940830057F434 /* ApiKeys.swift in Sources */,
+				142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */,
 				140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */,
 				14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */,
 				14F75BD322F24A890034D6F1 /* MuralAnnotation.swift in Sources */,
