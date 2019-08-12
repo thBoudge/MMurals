@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 import MapKit
 import RealmSwift
 
@@ -15,13 +16,21 @@ class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     private let muralsService = MuralsService()
-    //       create CLLOcation
-    let montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
+//    //       create CLLOcation
+//    private var locationManager: CLLocationManager?
+//    private var previousLocation: CLLocation?
+    //MARK: Properties
+    private let locationManager = CLLocationManager()
+    var montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
+//    var montrealCenter = CLLocation
+//    let region : MKCoordinateRegion?
+    // create a list of MuralAnnotation
+    var muralAnnotationList : [MuralAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getLocation()
         loadMurals()
-
         
         //How close we want to be
         let regionRadius: CLLocationDistance = 1000.0
@@ -34,12 +43,11 @@ class MapViewController: UIViewController {
         // create a list of murals
         let realm = try! Realm()
         let muralsList = realm.objects(MuralRealm.self)
-        // create a list of MuralAnnotation
-        var muralAnnotationList : [MuralAnnotation] = []
+        
         for mural in muralsList {
             
             let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)
-            let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), imageUrl: mural.image)
+            let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), id: mural.id)
             muralAnnotationList.append(newMural)
             
         }
@@ -70,14 +78,17 @@ class MapViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destinationVC = segue.destination as! RoutingViewController
         //we inform where we send data in other viewController
-        var points : [CLLocationCoordinate2D] = []
-        points.append(CLLocationCoordinate2D(latitude: 45.555841, longitude: -73.616364))
-        points.append(CLLocationCoordinate2D(latitude: 45.510131, longitude: -73.563033))
-        points.append(CLLocationCoordinate2D(latitude: 45.519379, longitude: -73.584781))
-        points.append(CLLocationCoordinate2D(latitude: 45.523362, longitude: -73.604375))
-        points.append(CLLocationCoordinate2D(latitude: 45.539966, longitude: -73.614816))
-        points.append(CLLocationCoordinate2D(latitude: 45.52159, longitude: -73.552993))
-        points.append(CLLocationCoordinate2D(latitude: 45.512805, longitude: -73.563467))
+        var points : [MuralAnnotation] = []
+        
+        let startPoint = MuralAnnotation(coordinate: montrealCenter.coordinate , title: "Start Point", subtitle: "", id: 0)
+        points.append(startPoint)
+        points.append(muralAnnotationList[12])
+        points.append(muralAnnotationList[120])
+        points.append(muralAnnotationList[56])
+        points.append(muralAnnotationList[150])
+        points.append(muralAnnotationList[34])
+        points.append(muralAnnotationList[64])
+        
         destinationVC.pointArray = points
     }
     
@@ -115,5 +126,63 @@ class MapViewController: UIViewController {
 
 extension MapViewController: MKMapViewDelegate{
 
+    //Make appear internet site after a tap on annotation
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
+        guard let muralCoordinate = view.annotation?.coordinate else {return}
+        
+        for coordinatePoint in muralAnnotationList {
+            
+            if muralCoordinate.latitude == coordinatePoint.coordinate.latitude && muralCoordinate.longitude == coordinatePoint.coordinate.longitude{
+                
+                guard let urlString = coordinatePoint.imageUrl else {return}
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            
+        }
+    }
+        
+}
+
+// MARK: Localisation Methods
+extension MapViewController : CLLocationManagerDelegate{
+    
+    func getLocation(){
+        
+        locationManager.delegate = self
+        //inform type of accuracy we need localisation
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        // Ask costumer if he allows us to use This phone to gps
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    }
+    
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        let location = locations[locations.count-1]
+        //if correct data we stop localisation
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            locationManager.delegate = nil
+        }
+        print("lattitude : \(location.coordinate.latitude)\n longitude : \(location.coordinate.longitude)")
+        
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        
+        montrealCenter = CLLocation(latitude: latitude, longitude: longitude)
+        
+    }
+    
+    
+    //didFailWithError method here:
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        
+        print("Position Unavailable")
+        
+    }
+    
+    
 }

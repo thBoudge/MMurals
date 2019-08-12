@@ -13,7 +13,7 @@ class ClusterView: MKMarkerAnnotationView {
 
     override var annotation: MKAnnotation? {
         willSet {
-            markerTintColor = UIColor.purple
+            markerTintColor = .purple
         }
     }
 

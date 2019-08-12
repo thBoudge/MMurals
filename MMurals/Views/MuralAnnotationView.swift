@@ -12,10 +12,15 @@ import MapKit
 class MuralAnnotationView: MKMarkerAnnotationView {
 
     override var annotation: MKAnnotation?{
+        
         willSet{
              if let muralAnnotation = newValue as? MuralAnnotation {
             //add an emoji as pointform
-                    glyphText = "👁"
+                let image = UIImage(named: "muralPoint")
+                glyphTintColor = .white
+                glyphImage = image
+                
+//                    glyphText = "👁"
                     //We inform AnnotationVuew that we want to display additional information (imageMural)
                     //******************* droit auteur plutot faire apparaitre page du site web ********\\
                     canShowCallout = true
@@ -23,7 +28,6 @@ class MuralAnnotationView: MKMarkerAnnotationView {
                     clusteringIdentifier = "Mural"
                 
                     // add an image as additional information
-                
                     guard let imageUrl = muralAnnotation.imageUrl else {return }
                     guard let url = URL(string: imageUrl) else {return}
                     guard let data = try? Data(contentsOf: url) else {return }
@@ -42,4 +46,8 @@ class MuralAnnotationView: MKMarkerAnnotationView {
         }
 
     }
+    
+    
 }
+
+

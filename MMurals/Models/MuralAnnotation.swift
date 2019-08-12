@@ -10,15 +10,19 @@ import UIKit
 import MapKit
 
 class MuralAnnotation: NSObject, MKAnnotation {
+    var id : Int
     var coordinate: CLLocationCoordinate2D
     var subtitle: String?
     var title: String?
     var imageUrl : String?
+
     
-    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, imageUrl: String) {
+    init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, id : Int) {
+        self.id = id
         self.coordinate = coordinate
         self.title = title
         self.subtitle = subtitle
-       self.imageUrl = imageUrl
+        self.imageUrl = "http://ville.montreal.qc.ca/murales/detail/\(id)"
     }
+    
 }
