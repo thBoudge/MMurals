@@ -13,23 +13,64 @@ import RealmSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private let muralsService = MuralsService()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        if let date = UserDefaults.standard.object(forKey: "date") as? Date {
+            let calendar = Calendar.current
+            guard let dateInterval = calendar.dateInterval(of: .day, for: date )?.duration else {return true}
+            print(dateInterval)
+            if dateInterval >= 1814400.0  {
+                UserDefaults.standard.set(calendar, forKey: "date")
+                loadMurals()
+            }
+
+        }else{
+            print("no userdefaults")
+            UserDefaults.standard.set(Date(), forKey: "date")
+            loadMurals()
+            
+            
+        }
+        
+
+        
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")
         
-        //MARK: - Initialise a New Realm
-//        do {
-//            let _ = try Realm()
-//            
-//        } catch  {
-//            print("Error initialising new realm, \(error)")
-//        }
+        
         
         return true
+    }
+    
+    private func loadMurals(){
+        
+        muralsService.getMurals { (success, response) in
+            if success, let data = response  {
+                //                print(data)
+                //////////////// tempory need to be done depending data update date \\\\\\\\\\\\\\\\\\\\\\\\
+                let realm = try! Realm()
+                let numberOfPersistentData = realm.objects(MuralRealm.self).count
+                guard let numberOfAPIData = data.features?.count else {return}
+                try! realm.write {
+                    realm.deleteAll()
+                }
+                if numberOfAPIData > numberOfPersistentData {
+                    // Delete all objects from the realm
+                    try! realm.write {
+                        realm.deleteAll()
+                    }
+                    MuralRealm.addMurals(mural: data)
+                    
+                }
+                //                MuralRealm.addMurals(mural: data)
+                /////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            } else {
+                
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
