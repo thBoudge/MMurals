@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jhp-Xy-grz">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -22,11 +22,12 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OXA-iE-lRC">
-                                <rect key="frame" x="143.66666666666666" y="688" width="126.99999999999997" height="29"/>
+                                <rect key="frame" x="136.66666666666666" y="688" width="140.99999999999997" height="29"/>
                                 <segments>
-                                    <segment title="First"/>
+                                    <segment title="Standard"/>
                                     <segment title="Satellite"/>
                                 </segments>
+                                <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <action selector="changeMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="3S8-OU-xxp"/>
                                 </connections>
@@ -57,13 +58,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="tt6-71-cfY"/>
                     <connections>
                         <outlet property="mapView" destination="M0q-Qo-m4i" id="j1f-0f-O71"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="135" y="99.295774647887328"/>
+            <point key="canvasLocation" x="1042.0289855072465" y="98.641304347826093"/>
         </scene>
         <!--Routing View Controller-->
         <scene sceneID="9RP-K6-3Vw">
@@ -74,15 +76,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                             </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZaC-Ne-762">
+                                <rect key="frame" x="101" y="688" width="212" height="29"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Satelite"/>
+                                    <segment title="FlyOver"/>
+                                </segments>
+                                <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeMapType:" destination="DBl-v3-5AJ" eventType="valueChanged" id="B47-B9-joP"/>
+                                </connections>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="neF-Az-lgV" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="-20" id="5G2-Xc-Kw5"/>
                             <constraint firstItem="neF-Az-lgV" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" id="A8x-Nd-kSf"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="ZaC-Ne-762" secondAttribute="bottom" constant="20" id="Y8a-ey-C9i"/>
                             <constraint firstItem="gii-Wx-WJg" firstAttribute="trailing" secondItem="neF-Az-lgV" secondAttribute="trailing" id="jfB-MV-CEY"/>
                             <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="neF-Az-lgV" secondAttribute="bottom" id="omw-O1-abE"/>
+                            <constraint firstItem="ZaC-Ne-762" firstAttribute="centerX" secondItem="EPN-Uw-zGf" secondAttribute="centerX" id="tAw-eM-4fC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gii-Wx-WJg"/>
                     </view>
@@ -92,7 +109,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avF-nV-qj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1032.8" y="99.400299850074973"/>
+            <point key="canvasLocation" x="1939.1304347826087" y="98.641304347826093"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="tk4-9N-VpS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="jhp-Xy-grz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yoP-kD-acK">
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="yPG-cS-5dR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qBX-vT-M0y" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="134.78260869565219" y="98.641304347826093"/>
         </scene>
     </scenes>
 </document>

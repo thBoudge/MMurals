@@ -38,6 +38,23 @@ class RoutingViewController: UIViewController {
         routingMapView.delegate = self
     }
     
+    
+    @IBAction func changeMapType(_ sender: UISegmentedControl) {
+        
+        if sender.selectedSegmentIndex == 0 {
+            routingMapView.mapType = .standard
+        }else if sender.selectedSegmentIndex == 1{
+            routingMapView.mapType = .satellite
+        } else if sender.selectedSegmentIndex == 2{
+            routingMapView.mapType = .satelliteFlyover
+            guard let coordinate = pointArray?.first?.coordinate else {return}
+            let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: 300, pitch: 40, heading: 0)
+            routingMapView.camera = camera
+        }
+        
+    }
+    
+    
     private func getDirections(sortedLocations : [MuralAnnotation]){
         
         for i in 0 ..< sortedLocations.count - 1 {

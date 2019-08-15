@@ -6,7 +6,7 @@
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import MapKit
 
 class MuralAnnotation: NSObject, MKAnnotation {
