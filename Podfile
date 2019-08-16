@@ -7,5 +7,11 @@ target 'MMurals' do
 
   # Pods for MMurals
   pod 'RealmSwift'
+  
+  # Pods link for MMuralsTests
+  target 'MMuralsTests' do
+    inherit! :search_paths
+    pod 'RealmSwift'
+  end
 
 end

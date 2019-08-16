@@ -27,7 +27,7 @@ class MuralsServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
     
-    func testGetDeviseShouldPostFailedCallbackIfNoData() {
+    func testGetMuralsShouldPostFailedCallbackIfNoData() {
         // Given
         let muralsService = MuralsService(muralSession: URLSessionFake(data: nil, response: nil, error: nil))
         
@@ -44,7 +44,7 @@ class MuralsServiceTests: XCTestCase {
     }
     
     
-    func testGetDeviseShouldPostFailedCallbackIfIncorrectData() {
+    func testGetMuralsShouldPostFailedCallbackIfIncorrectData() {
         // Given
         let muralsService = MuralsService(muralSession: URLSessionFake(data: nil, response: FakeMuralsResponseData.responseOk, error: nil))
         
@@ -61,7 +61,7 @@ class MuralsServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
     
-    func testGetDeviseShouldPostFailedCallbackIfStatusTResponseIsfivehundred() {
+    func testGetMuralsShouldPostFailedCallbackIfStatusTResponseIsfivehundred() {
         // Given
         let muralsService = MuralsService(muralSession: URLSessionFake(data: FakeMuralsResponseData.responseCorrectData, response: FakeMuralsResponseData.responseNot, error: nil))
         
@@ -78,7 +78,7 @@ class MuralsServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 0.01)
     }
     
-    func testGetDeviseShouldPostSuccessCallbackIfNoErrorAndCorrectData()  {
+    func testGetMuralsShouldPostSuccessCallbackIfNoErrorAndCorrectData()  {
         
         
         // Given
