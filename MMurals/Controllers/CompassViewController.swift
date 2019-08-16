@@ -42,7 +42,7 @@ class CompassViewController: UIViewController {
         compassMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         
         //How close we want to be
-        let regionRadius: CLLocationDistance = 3000.0
+        let regionRadius: CLLocationDistance = 1500.0
         // create a region
         let region = MKCoordinateRegion(center: montrealCenter.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
@@ -61,21 +61,39 @@ class CompassViewController: UIViewController {
     
     //prepare segue before to perfomr it
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
         let destinationVC = segue.destination as! RoutingViewController
         //we inform where we send data in other viewController
+        let startPoint = MuralAnnotation(coordinate: montrealCenter.coordinate , title: "Start Point", subtitle: "", id: 0)
         var points : [MuralAnnotation] = []
         
-        //        guard let startCoordinate = montrealCenter?.coordinate else {return}
-        let startPoint = MuralAnnotation(coordinate: montrealCenter.coordinate , title: "Start Point", subtitle: "", id: 0)
         points.append(startPoint)
-        points.append(muralAnnotationList[12])
-        points.append(muralAnnotationList[120])
-        points.append(muralAnnotationList[56])
-        points.append(muralAnnotationList[150])
-        points.append(muralAnnotationList[34])
-        points.append(muralAnnotationList[64])
+        points += getMuralsToVisit()
         
         destinationVC.pointArray = points
+    }
+    
+    private func getMuralsToVisit() -> [MuralAnnotation]{
+        
+        let x = compassMapView.frame.width / 2.0
+        let y = compassMapView.frame.height / 4.0
+        let centerCGPoint = CGPoint(x: x, y: y)
+        
+        let centerCoordinate = compassMapView.convert(centerCGPoint, toCoordinateFrom: compassMapView)
+        
+        let selectedRegion = CLCircularRegion(center: centerCoordinate, radius: 1000, identifier: "selectedRegion")
+        
+        
+        let muralsSelectedList = muralAnnotationList.filter { (mural) -> Bool in
+            
+            if selectedRegion.contains(mural.coordinate){
+                return true
+            }
+            return false
+        }
+        
+        return muralsSelectedList
     }
     
 }

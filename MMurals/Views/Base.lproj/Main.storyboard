@@ -75,7 +75,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
                                 <rect key="frame" x="0.0" y="44" width="414" height="692"/>
                                 <connections>
                                     <outlet property="delegate" destination="QOj-n7-d0p" id="FWT-9F-Qqq"/>
