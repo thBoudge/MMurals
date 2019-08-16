@@ -23,8 +23,6 @@ class MuralRealm: Object {
     
     
 
-    
-    
     static func addMurals(mural: Mural, realm : Realm = try! Realm()){
 
         guard let muralsData = mural.features else {return}
