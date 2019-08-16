@@ -112,32 +112,8 @@ class MapViewController: UIViewController {
     
     @IBAction func getDirectionMap(_ sender: UIButton) {
         
-        self.performSegue(withIdentifier: "RoutingSegue", sender: self)
+        self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
-    
-    //prepare segue before to perfomr it
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! RoutingViewController
-        //we inform where we send data in other viewController
-        var points : [MuralAnnotation] = []
-        
-//        guard let startCoordinate = montrealCenter?.coordinate else {return}
-        let startPoint = MuralAnnotation(coordinate: montrealCenter.coordinate , title: "Start Point", subtitle: "", id: 0)
-        points.append(startPoint)
-        points.append(muralAnnotationList[12])
-        points.append(muralAnnotationList[120])
-        points.append(muralAnnotationList[56])
-        points.append(muralAnnotationList[150])
-        points.append(muralAnnotationList[34])
-        points.append(muralAnnotationList[64])
-        
-        destinationVC.pointArray = points
-    }
-    
-    
-   
-
-    
 }
 
 

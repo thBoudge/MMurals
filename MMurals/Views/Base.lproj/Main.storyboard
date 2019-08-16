@@ -40,7 +40,7 @@
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="getDirectionMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AYI-uF-kTs"/>
-                                    <segue destination="DBl-v3-5AJ" kind="show" identifier="RoutingSegue" id="cJW-Zs-V4G"/>
+                                    <segue destination="QOj-n7-d0p" kind="show" identifier="CompassPageSegue" id="phO-Ca-qVn"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -67,6 +67,48 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="98.641304347826093"/>
         </scene>
+        <!--Compass View Controller-->
+        <scene sceneID="eCs-mV-RIu">
+            <objects>
+                <viewController id="QOj-n7-d0p" customClass="CompassViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CrH-jx-1SP">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
+                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QOj-n7-d0p" id="FWT-9F-Qqq"/>
+                                </connections>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ics-OW-Xb9">
+                                <rect key="frame" x="184" y="353" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="goToRouteDirection:" destination="QOj-n7-d0p" eventType="touchUpInside" id="kQ6-iE-bPh"/>
+                                    <segue destination="DBl-v3-5AJ" kind="show" identifier="RoutingViewSegue" id="xck-kd-JHd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="C4x-cz-Upd" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" id="ErY-BO-moX"/>
+                            <constraint firstItem="4lm-q0-G1Q" firstAttribute="trailing" secondItem="C4x-cz-Upd" secondAttribute="trailing" id="OhC-7i-q3d"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="ahq-XV-oaw"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerY" secondItem="CrH-jx-1SP" secondAttribute="centerY" id="dFV-fM-Vnf"/>
+                            <constraint firstItem="4lm-q0-G1Q" firstAttribute="bottom" secondItem="C4x-cz-Upd" secondAttribute="bottom" id="exX-gk-JWf"/>
+                            <constraint firstItem="C4x-cz-Upd" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="-20" id="kVY-aR-lbV"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4lm-q0-G1Q"/>
+                    </view>
+                    <connections>
+                        <outlet property="compassMapView" destination="C4x-cz-Upd" id="gYL-Uy-upZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LVn-Zk-ncU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1992.753623188406" y="98.641304347826093"/>
+        </scene>
         <!--Routing View Controller-->
         <scene sceneID="9RP-K6-3Vw">
             <objects>
@@ -77,6 +119,9 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
                                 <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DBl-v3-5AJ" id="YYA-ok-gFF"/>
+                                </connections>
                             </mapView>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZaC-Ne-762">
                                 <rect key="frame" x="101" y="688" width="212" height="29"/>
@@ -109,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avF-nV-qj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1939.1304347826087" y="98.641304347826093"/>
+            <point key="canvasLocation" x="2972" y="99"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tk4-9N-VpS">
