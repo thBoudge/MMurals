@@ -34,14 +34,17 @@ class DistanceLocation {
         let startLocation = locations[0]
         var sortedPoint : [MuralAnnotation] = []
         sortedPoint.append(startLocation)
-        var i = 0
+        var i = 1
         
         repeat{
+            print("sortedPoint \(i)")
+            print(sortedPoint)
             guard let closureLocation = pointBestDistance(muralsLocation: locations, sortedPoint: sortedPoint) else {return []}
             sortedPoint.append(closureLocation)
             i += 1
         } while i < locations.count - 1
-        
+        print("final")
+        print(sortedPoint)
         return sortedPoint
         
     }

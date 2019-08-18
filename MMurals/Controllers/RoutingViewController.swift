@@ -19,10 +19,14 @@ class RoutingViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("pointsArray")
+        print(pointArray)
         guard let points = pointArray else {return}
+        print("points2 \(points.count)")
         print(points)
         let sortedLocations = distanceLocation.locationsSortedByDistanceFromPreviousLocation(locations: points)
+        print("sortedLocations")
+        print(sortedLocations)
         // https://www.youtube.com/watch?v=vUvf_dlr6IU
         getDirections(sortedLocations: sortedLocations)
         
@@ -58,7 +62,6 @@ class RoutingViewController: UIViewController {
     private func getDirections(sortedLocations : [MuralAnnotation]){
         
         for i in 0 ..< sortedLocations.count - 1 {
-            
             var muralsDirection : [CLLocationCoordinate2D] = []
             muralsDirection.append(sortedLocations[i].coordinate)
             muralsDirection.append(sortedLocations[i + 1].coordinate)
@@ -74,6 +77,7 @@ class RoutingViewController: UIViewController {
                     self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 }
             }
+            
         }
     }
 

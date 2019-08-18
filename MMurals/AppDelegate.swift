@@ -23,9 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             //                Calendar.current 79563.63482797146
             //file:///var/mobile/Containers/Data/Application/2844032A-D042-4022-9855-D28C5917AF3E/Documents/default.realm
             let dateInterval = calendar.timeIntervalSince(date) 
-            print(date)
-            print(calendar)
-            print(dateInterval)
+//            print(date)
+//            print(calendar)
+//            print(dateInterval)
             if dateInterval >= 1814400.0  {
                 UserDefaults.standard.removeObject(forKey: "date")
                 UserDefaults.standard.set(Date(), forKey: "date")
@@ -33,8 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
         }else{
-            print("no userdefaults")
-            print(Date())
+//            print("no userdefaults")
+//            print(Date())
             UserDefaults.standard.set(Date(), forKey: "date")
             DispatchQueue.main.async {
                 self.loadMurals()

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jhp-Xy-grz">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -76,14 +76,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
-                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <connections>
                                     <outlet property="delegate" destination="QOj-n7-d0p" id="FWT-9F-Qqq"/>
                                 </connections>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ics-OW-Xb9">
-                                <rect key="frame" x="184" y="353" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ics-OW-Xb9">
+                                <rect key="frame" x="43" y="165" width="328" height="406"/>
+                                <state key="normal" title="Button" image="compass"/>
                                 <connections>
                                     <action selector="goToRouteDirection:" destination="QOj-n7-d0p" eventType="touchUpInside" id="kQ6-iE-bPh"/>
                                     <segue destination="DBl-v3-5AJ" kind="show" identifier="RoutingViewSegue" id="xck-kd-JHd"/>
@@ -92,12 +92,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="145" id="7z9-WU-kjr"/>
                             <constraint firstItem="C4x-cz-Upd" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" id="ErY-BO-moX"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" constant="43" id="O2l-Vf-kre"/>
                             <constraint firstItem="4lm-q0-G1Q" firstAttribute="trailing" secondItem="C4x-cz-Upd" secondAttribute="trailing" id="OhC-7i-q3d"/>
-                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="ahq-XV-oaw"/>
-                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerY" secondItem="CrH-jx-1SP" secondAttribute="centerY" id="dFV-fM-Vnf"/>
                             <constraint firstItem="4lm-q0-G1Q" firstAttribute="bottom" secondItem="C4x-cz-Upd" secondAttribute="bottom" id="exX-gk-JWf"/>
                             <constraint firstItem="C4x-cz-Upd" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="-20" id="kVY-aR-lbV"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerX" secondItem="C4x-cz-Upd" secondAttribute="centerX" id="pho-ch-bde"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerY" secondItem="CrH-jx-1SP" secondAttribute="centerY" id="qE9-pF-LKF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4lm-q0-G1Q"/>
                     </view>
@@ -118,7 +120,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="692"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                                 <connections>
                                     <outlet property="delegate" destination="DBl-v3-5AJ" id="YYA-ok-gFF"/>
                                 </connections>
@@ -166,13 +168,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="yPG-cS-5dR"/>
-                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qBX-vT-M0y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="134.78260869565219" y="98.641304347826093"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="compass" width="600" height="600"/>
+    </resources>
 </document>

@@ -29,12 +29,12 @@ class MapViewController: UIViewController {
         
         DispatchQueue.main.async {
 //            self.getLocation()
-            print("2 getLocation")
+//            print("2 getLocation")
 
         }
         
         DispatchQueue.main.async {
-            print("3")
+//            print("3")
 //            MARK: - Initialise a New Realm
                         // create a list of murals
                         let realm = try! Realm()
@@ -55,7 +55,7 @@ class MapViewController: UIViewController {
         
         DispatchQueue.main.async {
             
-            print("4")
+//            print("4")
                         //How close we want to be
                         let regionRadius: CLLocationDistance = 3000.0
                         // create a region

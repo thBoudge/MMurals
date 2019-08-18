@@ -15,8 +15,10 @@ class CompassViewController: UIViewController {
     
     @IBOutlet weak var compassMapView: MKMapView!
     
-    let montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
+//    var mapCenter : CLLocation?
     let locationManager = CLLocationManager()
+    //How close we want to be
+    let regionRadius: CLLocationDistance = 3000.0
     
     // create a list of MuralAnnotation
     var muralAnnotationList : [MuralAnnotation] = []
@@ -24,7 +26,39 @@ class CompassViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // MARK: - Initialise a New Realm
+        checkLocationServices()
+        
+    }
+    
+    @IBAction func goToRouteDirection(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "RoutingViewSegue", sender: self)
+    }
+    
+    //prepare segue before to perfomr it
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        
+        let destinationVC = segue.destination as! RoutingViewController
+        //we inform where we send data in other viewController
+        if let userPosition = locationManager.location?.coordinate {
+        let startPoint = MuralAnnotation(coordinate: userPosition, title: "Start Point", subtitle: "", id: 0)
+        
+        var points : [MuralAnnotation] = []
+        
+        points.append(startPoint)
+//        points += getMuralsToVisit()
+        let muralsPoint = getMuralsToVisit()
+            for mural in muralsPoint{
+                points.append(mural)
+            }
+        print("point1")
+            print(points)
+        destinationVC.pointArray = []
+        destinationVC.pointArray = points
+        }
+    }
+    
+    private func addMuralsAnnotation(){
         // create a list of murals
         let realm = try! Realm()
         let muralsList = realm.objects(MuralRealm.self)
@@ -40,38 +74,6 @@ class CompassViewController: UIViewController {
         compassMapView.addAnnotations(self.muralAnnotationList)
         compassMapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         compassMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-        
-        //How close we want to be
-        let regionRadius: CLLocationDistance = 1500.0
-        // create a region
-        let region = MKCoordinateRegion(center: montrealCenter.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        
-        //we pass region to MapView
-        compassMapView.setRegion(region, animated: true)
-        
-        
-        locationManager.delegate = self
-        locationManager.startUpdatingHeading()
-        
-    }
-    
-    @IBAction func goToRouteDirection(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "RoutingViewSegue", sender: self)
-    }
-    
-    //prepare segue before to perfomr it
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        
-        let destinationVC = segue.destination as! RoutingViewController
-        //we inform where we send data in other viewController
-        let startPoint = MuralAnnotation(coordinate: montrealCenter.coordinate , title: "Start Point", subtitle: "", id: 0)
-        var points : [MuralAnnotation] = []
-        
-        points.append(startPoint)
-        points += getMuralsToVisit()
-        
-        destinationVC.pointArray = points
     }
     
     private func getMuralsToVisit() -> [MuralAnnotation]{
@@ -87,7 +89,7 @@ class CompassViewController: UIViewController {
         
         let muralsSelectedList = muralAnnotationList.filter { (mural) -> Bool in
             
-            if selectedRegion.contains(mural.coordinate){
+           if selectedRegion.contains(mural.coordinate){
                 return true
             }
             return false
@@ -109,7 +111,65 @@ extension CompassViewController: CLLocationManagerDelegate {
         }
     }
     
+////    new
+//        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//            mapCenter = locations.last
+//        }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
+    }
+    
+    private func checkLocationServices(){
+        
+        if CLLocationManager.locationServicesEnabled(){
+            setupLocationManager()
+            checkLocationAuthorization()
+            addMuralsAnnotation()
+            locationManager.startUpdatingHeading()
+        } else {
+            // show an alert letting the user know they have to turn location services On
+        }
+    }
+    
+    private func setupLocationManager(){
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+    }
+    
+    private func checkLocationAuthorization(){
+        switch CLLocationManager.authorizationStatus(){
+        case .authorizedWhenInUse :
+            //show user Location
+            compassMapView.showsUserLocation = true
+            centerLocation()
+        case .denied :
+            // show an alert letting user know how to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted: break
+        // show an alert letting user know how to turn on permissions
+        case .authorizedAlways:
+            break
+        @unknown default:
+            break
+        }
+    }
+    
+    private func centerLocation(){
+        // create a region
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+            
+            //we pass region to MapView
+            compassMapView.setRegion(region, animated: true)
+        }
+    }
+    
     
     
 }
+
+
 
