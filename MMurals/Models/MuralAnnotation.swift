@@ -8,6 +8,7 @@
 
 import Foundation
 import MapKit
+import RealmSwift
 
 class MuralAnnotation: NSObject, MKAnnotation {
     var id : Int
@@ -24,5 +25,8 @@ class MuralAnnotation: NSObject, MKAnnotation {
         self.subtitle = subtitle
         self.imageUrl = "http://ville.montreal.qc.ca/murales/detail/\(id)"
     }
+    
+    
+    
     
 }

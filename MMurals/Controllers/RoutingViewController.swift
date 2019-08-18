@@ -15,27 +15,16 @@ class RoutingViewController: UIViewController {
     @IBOutlet weak var routingMapView: MKMapView!
 
     var pointArray : [MuralAnnotation]?
-    var distanceLocation = DistanceLocation()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("pointsArray")
-        print(pointArray)
+
         guard let points = pointArray else {return}
-        print("points2 \(points.count)")
-        print(points)
-        let sortedLocations = distanceLocation.locationsSortedByDistanceFromPreviousLocation(locations: points)
-        print("sortedLocations")
-        print(sortedLocations)
+
         // https://www.youtube.com/watch?v=vUvf_dlr6IU
-        getDirections(sortedLocations: sortedLocations)
-        
-        guard let muralsPointList = pointArray else {return}
-        var muralAnnotationList : [MuralAnnotation] = []
-        for mural in muralsPointList {
-            muralAnnotationList.append(mural)
-        }
-        
+        getDirections(sortedLocations: points)
+
+        guard let muralAnnotationList = pointArray else {return}
         routingMapView.addAnnotations(muralAnnotationList)
         routingMapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         routingMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)

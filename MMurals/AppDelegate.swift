@@ -39,18 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DispatchQueue.main.async {
                 self.loadMurals()
             }
-            
-            
-            
-        }
-        
-
-        
+         }
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")
-        
-        
-        
         return true
     }
     
@@ -58,27 +49,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         muralsService.getMurals { (success, response) in
             if success, let data = response  {
-                //                print(data)
-                //////////////// tempory need to be done depending data update date \\\\\\\\\\\\\\\\\\\\\\\\
-//                let realm = try! Realm()
                 MuralRealm.addMurals(mural: data)
-//                let numberOfPersistentData = realm.objects(MuralRealm.self).count
-//
-//                guard let numberOfAPIData = data.features?.count else {return}
-//
-//
-//                if numberOfAPIData > numberOfPersistentData {
-//                    // Delete all objects from the realm
-//                    try! realm.write {
-//                        realm.deleteAll()
-//                    }
-//                    MuralRealm.addMurals(mural: data)
-//
-//                }
-                //                MuralRealm.addMurals(mural: data)
-                /////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
             } else {
-                
+                //create an alert
             }
         }
     }

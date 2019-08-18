@@ -17,86 +17,15 @@ class MapViewController: UIViewController {
     
     
     //MARK: Properties
-    private let locationManager = CLLocationManager()
-    var montrealCenter = CLLocation(latitude: 45.519379, longitude: -73.584781)
-//    var montrealCenter : CLLocation?
-    
+    let locationManager = CLLocationManager()
+    let regionRadius: CLLocationDistance = 5000.0
     // create a list of MuralAnnotation
     var muralAnnotationList : [MuralAnnotation] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        DispatchQueue.main.async {
-//            self.getLocation()
-//            print("2 getLocation")
-
-        }
-        
-        DispatchQueue.main.async {
-//            print("3")
-//            MARK: - Initialise a New Realm
-                        // create a list of murals
-                        let realm = try! Realm()
-                        let muralsList = realm.objects(MuralRealm.self)
-            
-                        for mural in muralsList {
-            
-                            let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)
-                            let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), id: mural.id)
-                            self.muralAnnotationList.append(newMural)
-            
-                        }
-            
-                        self.mapView.addAnnotations(self.muralAnnotationList)
-                        self.mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-                        self.mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-        }
-        
-        DispatchQueue.main.async {
-            
-//            print("4")
-                        //How close we want to be
-                        let regionRadius: CLLocationDistance = 3000.0
-                        // create a region
-                        let region = MKCoordinateRegion(center: self.montrealCenter.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-            
-                        //we pass region to MapView
-                        self.mapView.setRegion(region, animated: true)
-            
-                        self.mapView.delegate = self
-        }
-        
-        
-        
-        
-//        //How close we want to be
-//        let regionRadius: CLLocationDistance = 3000.0
-//        // create a region
-//        let region = MKCoordinateRegion(center: montrealCenter.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//
-//        //we pass region to MapView
-//        mapView.setRegion(region, animated: true)
-//
-//
-//        //MARK: - Initialise a New Realm
-//         // create a list of murals
-//            let realm = try! Realm()
-//            let muralsList = realm.objects(MuralRealm.self)
-//
-//        for mural in muralsList {
-//
-//            let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)
-//            let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), id: mural.id)
-//            muralAnnotationList.append(newMural)
-//
-//        }
-//
-//        mapView.addAnnotations(muralAnnotationList)
-//        mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//        mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-//        mapView.delegate = self
-        print("terminé")
+        checkLocationServices()
+        addAnnotation()
     }
     
     // chamge Map type fom Standard to satellite
@@ -114,6 +43,16 @@ class MapViewController: UIViewController {
         
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
+    
+    private func addAnnotation(){
+        
+        muralAnnotationList = MuralAnnotationView.getMuralAnnotationsList()
+        mapView.addAnnotations(self.muralAnnotationList)
+        mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+        
+    }
+    
 }
 
 
@@ -136,14 +75,33 @@ extension MapViewController: MKMapViewDelegate{
             
         }
     }
-        
 }
 
 // MARK: Localisation Methods
 extension MapViewController : CLLocationManagerDelegate{
-    
-    func getLocation(){
+
+    //didFailWithError method here:
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         
+        print("Position Unavailable \(error)")
+        
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAuthorization()
+    }
+    
+    private func checkLocationServices(){
+        
+        if CLLocationManager.locationServicesEnabled(){
+            setupLocationManager()
+            checkLocationAuthorization()
+        } else {
+            // show an alert letting the user know they have to turn location services On
+        }
+    }
+    
+    private func setupLocationManager(){
         locationManager.delegate = self
         //inform type of accuracy we need localisation
         locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
@@ -152,55 +110,34 @@ extension MapViewController : CLLocationManagerDelegate{
         locationManager.startUpdatingLocation()
     }
     
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let location = locations[locations.count-1]
-        //if correct data we stop localisation
-        if location.horizontalAccuracy > 0 {
-            locationManager.stopUpdatingLocation()
-            locationManager.delegate = nil
+   func checkLocationAuthorization(){
+        switch CLLocationManager.authorizationStatus(){
+        case .authorizedWhenInUse :
+            //show user Location
+            mapView.showsUserLocation = true
+            centerLocation()
+        case .denied :
+            // show an alert letting user know how to turn on permissions
+            break
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted: break
+        // show an alert letting user know how to turn on permissions
+        case .authorizedAlways:
+            break
+        @unknown default:
+            break
         }
-        print("lattitude : \(location.coordinate.latitude)\n longitude : \(location.coordinate.longitude)")
-        
-        let latitude = location.coordinate.latitude
-        let longitude = location.coordinate.longitude
-        
-        montrealCenter = CLLocation(latitude: latitude, longitude: longitude)
-        
-//        //How close we want to be
-//        let regionRadius: CLLocationDistance = 1000.0
-//        // create a region
-//        guard let startCoordinate = montrealCenter?.coordinate else {return}
-//        let region = MKCoordinateRegion(center: startCoordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//        //we pass region to MapView
-//        mapView.setRegion(region, animated: true)
-//
-//        // create a list of murals
-//        let realm = try! Realm()
-//        let muralsList = realm.objects(MuralRealm.self)
-//
-//        for mural in muralsList {
-//
-//            let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)
-//            let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), id: mural.id)
-//            muralAnnotationList.append(newMural)
-//
-//        }
-//
-//        mapView.addAnnotations(muralAnnotationList)
-//        mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-//        mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-//        mapView.delegate = self
-        
     }
     
-    
-    //didFailWithError method here:
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        
-        print("Position Unavailable")
-        
+    private func centerLocation(){
+        // create a region
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+            
+            //we pass region to MapView
+            mapView.setRegion(region, animated: true)
+        }
     }
-    
     
 }
