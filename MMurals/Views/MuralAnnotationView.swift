@@ -8,6 +8,7 @@
 
 import UIKit
 import MapKit
+import RealmSwift
 
 class MuralAnnotationView: MKMarkerAnnotationView {
 
@@ -25,35 +26,17 @@ class MuralAnnotationView: MKMarkerAnnotationView {
                 } else {
                 glyphImage = startImage
                 }
-                
-
                 //add a cluster
                 clusteringIdentifier = "Mural"
-//
-                //                //We inform AnnotationVuew that we want to display additional information (imageMural)
-                //                //******************* droit auteur plutot faire apparaitre page du site web ********\\
-                //                canShowCallout = true
-//                // add an image as additional information
-//                guard let imageUrl = muralAnnotation.imageUrl else {return }
-//                guard let url = URL(string: imageUrl) else {return}
-//                guard let data = try? Data(contentsOf: url) else {return }
-//                if data.count == 0 {
-//                    let image = UIImage(named: "no-graffiti" )
-//                    let imageView = UIImageView(image: image)
-//                    detailCalloutAccessoryView = imageView
-//                }else {
-//                    let image  = UIImage(data: data)
-//                    let imageView = UIImageView(image: image)
-//                    detailCalloutAccessoryView = imageView
-//                }
-                
             }
         
         }
 
     }
     
+
     
+
 }
 
 
