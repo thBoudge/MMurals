@@ -143,7 +143,7 @@ extension CompassViewController: LocationServiceDelegate {
         
         let pointsSorted = muralsVisitList()
         if pointsSorted.count > 1{
-            let distance =  distanceLocation.calculateDistanceAndNumberOfMurals(murals: pointsSorted)
+            let distance =  distanceLocation.calculateDistanceBetweenTwoMurals(murals: pointsSorted)
             let time =  Int(distance * 5000 / 3600)
             let timeHour =  time / 3600
             let timeMinutes =  time % 3600 / 60

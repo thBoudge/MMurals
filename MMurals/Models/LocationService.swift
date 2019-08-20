@@ -5,9 +5,6 @@
 //  Created by Thomas Bouges on 2019-08-19.
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
-
-import Foundation
-
 // https://stackoverflow.com/questions/55933283/location-service-as-a-singleton-in-swift-get-stuck-on-when-in-use
 
 import Foundation
