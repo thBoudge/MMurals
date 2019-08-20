@@ -8,11 +8,12 @@
 
 import Foundation
 import RealmSwift
-//import MapKit
+
 
 class MuralRealm: Object {
     
-    //MARK: - Persisted Properties
+    // MARK: - Persisted Properties
+    
     @objc dynamic var id : Int = 0
     @objc dynamic var artist : String = ""
     @objc dynamic var address : String = ""
@@ -22,7 +23,9 @@ class MuralRealm: Object {
     @objc dynamic var latitude = 0.0
     
     
-
+    
+    // MARK: - Methods
+    
     static func addMurals(mural: Mural, realm : Realm = try! Realm()){
 
         guard let muralsData = mural.features else {return}
