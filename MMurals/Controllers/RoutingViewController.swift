@@ -6,21 +6,35 @@
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
-import UIKit
 import MapKit
 
 
-class RoutingViewController: UIViewController {
+final class RoutingViewController: UIViewController {
+    
+    // MARK: - Oulets
     
     @IBOutlet weak var routingMapView: MKMapView!
 
+    // MARK: - Properties
+    let locationServ = LocationService.shared
     var pointArray : [MuralAnnotation]?
+    let regionRadius: CLLocationDistance = 1000.0
 
+    // MARK: - ViewDidLoad
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        routingMapView.showsUserLocation = true
+        locationServ.delegate = self
+        
+        let locationUser = locationServ.currentLocation.coordinate
+        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        
+        routingMapView.setRegion(region, animated: true)
+        
+        
         guard let points = pointArray else {return}
-
         // https://www.youtube.com/watch?v=vUvf_dlr6IU
         getDirections(sortedLocations: points)
 
@@ -31,9 +45,10 @@ class RoutingViewController: UIViewController {
         routingMapView.delegate = self
     }
     
+    // MARK: - IBACTION
     
+    // change Map type fom Standard to satellite to FlyOver
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
-        
         if sender.selectedSegmentIndex == 0 {
             routingMapView.mapType = .standard
         }else if sender.selectedSegmentIndex == 1{
@@ -44,10 +59,23 @@ class RoutingViewController: UIViewController {
             let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: 300, pitch: 40, heading: 0)
             routingMapView.camera = camera
         }
-        
     }
     
+    // Close viewPage
+    @IBAction func closeRoutingPage(_ sender: UIButton) {
+        self.performSegue(withIdentifier: "ReturnToCompassViewSegue", sender: self)
+    }
     
+    // MARK: prepare for Segue
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //arréter localisation
+    }
+    // MARK: - Methods
+    
+    
+    
+    /// create a route polyline between each Mural to visit and show it on MapView
     private func getDirections(sortedLocations : [MuralAnnotation]){
         
         for i in 0 ..< sortedLocations.count - 1 {
@@ -63,14 +91,14 @@ class RoutingViewController: UIViewController {
                 for route in response.routes {
                     self.routingMapView.addOverlay(route.polyline)
                     //show all the map surronding the direction
-                    self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+//                self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                 }
             }
             
         }
     }
 
-    
+    /// Create a request between two points and return it
     private func createDirectionRequest(coordinates:[CLLocationCoordinate2D]) -> MKDirections.Request {
 
         let destinationCoordinates = MKPlacemark(coordinate: coordinates[1])
@@ -85,36 +113,42 @@ class RoutingViewController: UIViewController {
     }
 }
 
+// MARK: - Extension MKMapViewDelegate
 
 extension RoutingViewController: MKMapViewDelegate {
     
-    // creat a renderer
+    // MARK: - func MKMapViewDelegate
+    
+    // Create a renderer
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .purple
-        renderer.lineWidth = 8
+        renderer.lineWidth = 5
         return renderer
     }
     
-    //Make appear internet site after a tap on annotation
+    // Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        guard let muralCoordinate = view.annotation?.coordinate else {return}
-        
-        guard let muralsPoints = pointArray  else {return}
-        
-        for coordinatePoint in muralsPoints {
-            
-            if muralCoordinate.latitude == coordinatePoint.coordinate.latitude && muralCoordinate.longitude == coordinatePoint.coordinate.longitude && coordinatePoint.id != 0 {
-                
-                guard let urlString = coordinatePoint.imageUrl else {return}
-                if let url = URL(string: urlString) {
-                    UIApplication.shared.open(url)
-                }
-            }
-            
-        }
+        MuralAnnotation.didSelectAnnotation(view: view, pointArray: pointArray)
     }
     
+}
+
+extension RoutingViewController: LocationServiceDelegate {
+   
+    func onLocationHeadingUpdate(newHeading: CLHeading) {
+        
+    }
+    
+    
+    func onLocationUpdate(location: CLLocation) {
+        print("Current Location : \(location)")
+        
+        
+    }
+    
+    func onLocationDidFailWithError(error: Error) {
+        print("Error while trying to update device location : \(error)")
+    }
 }
