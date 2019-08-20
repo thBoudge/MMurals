@@ -35,7 +35,6 @@ class CompassViewController: UIViewController {
         locationServ.locationManager.startUpdatingHeading()
         centerLocation()
         addMuralsAnnotation()
-//        checkLocationServices()
     }
     
     // MARK: - IBAction

@@ -34,7 +34,10 @@ final class MapViewController: UIViewController {
         addAnnotation()
     }
     
-
+    override func viewDidAppear(_ animated: Bool) {
+        locationServ.locationManager.startUpdatingLocation()
+        
+    }
     
     // MARK: - IBACTION
     
@@ -72,14 +75,14 @@ final class MapViewController: UIViewController {
         
     }
     
-    /// Create a Region that will be show on MapView
-    private func centerLocation(){
-        let locationUser = locationServ.currentLocation.coordinate
-        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-            
-        mapView.setRegion(region, animated: true)
-        
-    }
+//    /// Create a Region that will be show on MapView
+//    private func centerLocation(){
+//        let locationUser = locationServ.currentLocation.coordinate
+//        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+//
+//        mapView.setRegion(region, animated: false)
+//
+//    }
     
 }
 
@@ -98,13 +101,16 @@ extension MapViewController: MKMapViewDelegate{
 extension MapViewController: LocationServiceDelegate {
     
     func onLocationHeadingUpdate(newHeading: CLHeading) {
-        
+        //No need Here
     }
     
     
     func onLocationUpdate(location: CLLocation) {
         print("Current Location : \(location)")
-        centerLocation()
+        // Create a Region that will be show on MapView only when PageOpen and stop Update Location
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(region, animated: false)
+        locationServ.locationManager.stopUpdatingLocation()
         
     }
     
