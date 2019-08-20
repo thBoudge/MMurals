@@ -14,34 +14,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private let muralsService = MuralsService()
+    let locationService = LocationService.shared
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         if let date = UserDefaults.standard.object(forKey: "date") as? Date {
-            let calendar = Calendar.current
-            guard let dateInterval = calendar.dateInterval(of: .day, for: date )?.duration else {return true}
-            print(dateInterval)
+            let calendar = Date()
+            //                Calendar.current 79563.63482797146
+            //file:///var/mobile/Containers/Data/Application/2844032A-D042-4022-9855-D28C5917AF3E/Documents/default.realm
+            let dateInterval = calendar.timeIntervalSince(date) 
+//            print(date)
+//            print(calendar)
+//            print(dateInterval)
             if dateInterval >= 1814400.0  {
-                UserDefaults.standard.set(calendar, forKey: "date")
+                UserDefaults.standard.removeObject(forKey: "date")
+                UserDefaults.standard.set(Date(), forKey: "date")
                 loadMurals()
             }
 
         }else{
-            print("no userdefaults")
+//            print("no userdefaults")
+//            print(Date())
             UserDefaults.standard.set(Date(), forKey: "date")
-            loadMurals()
-            
-            
-        }
-        
-
-        
+            DispatchQueue.main.async {
+                self.loadMurals()
+            }
+         }
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")
-        
-        
-        
         return true
     }
     
@@ -49,26 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         muralsService.getMurals { (success, response) in
             if success, let data = response  {
-                //                print(data)
-                //////////////// tempory need to be done depending data update date \\\\\\\\\\\\\\\\\\\\\\\\
-                let realm = try! Realm()
-                let numberOfPersistentData = realm.objects(MuralRealm.self).count
-                guard let numberOfAPIData = data.features?.count else {return}
-                try! realm.write {
-                    realm.deleteAll()
-                }
-                if numberOfAPIData > numberOfPersistentData {
-                    // Delete all objects from the realm
-                    try! realm.write {
-                        realm.deleteAll()
-                    }
-                    MuralRealm.addMurals(mural: data)
-                    
-                }
-                //                MuralRealm.addMurals(mural: data)
-                /////////////////////////////////\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+                MuralRealm.addMurals(mural: data)
             } else {
-                
+                //create an alert
             }
         }
     }
