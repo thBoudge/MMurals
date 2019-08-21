@@ -77,24 +77,23 @@ final class RoutingViewController: UIViewController {
     
     /// create a route polyline between each Mural to visit and show it on MapView
     private func getDirections(sortedLocations : [MuralAnnotation]){
-        
-        for i in 0 ..< sortedLocations.count - 1 {
-            var muralsDirection : [CLLocationCoordinate2D] = []
-            muralsDirection.append(sortedLocations[i].coordinate)
-            muralsDirection.append(sortedLocations[i + 1].coordinate)
-            
-            let request = createDirectionRequest(coordinates: muralsDirection)
-            let directions = MKDirections(request: request)
-            directions.calculate { (response, error) in
-                guard let response = response else {return}
+        if sortedLocations.count >= 1 {
+            for i in 0 ..< sortedLocations.count - 1 {
+                var muralsDirection : [CLLocationCoordinate2D] = []
+                muralsDirection.append(sortedLocations[i].coordinate)
+                muralsDirection.append(sortedLocations[i + 1].coordinate)
                 
-                for route in response.routes {
-                    self.routingMapView.addOverlay(route.polyline)
-                    //show all the map surronding the direction
-//                self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                let request = createDirectionRequest(coordinates: muralsDirection)
+                let directions = MKDirections(request: request)
+                directions.calculate { (response, error) in
+                    guard let response = response else {return}
+                    
+                    for route in response.routes {
+                        self.routingMapView.addOverlay(route.polyline)
+                    }
                 }
+                
             }
-            
         }
     }
 
@@ -138,14 +137,11 @@ extension RoutingViewController: MKMapViewDelegate {
 extension RoutingViewController: LocationServiceDelegate {
    
     func onLocationHeadingUpdate(newHeading: CLHeading) {
-        
     }
     
     
     func onLocationUpdate(location: CLLocation) {
         print("Current Location : \(location)")
-        
-        
     }
     
     func onLocationDidFailWithError(error: Error) {

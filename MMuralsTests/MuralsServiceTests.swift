@@ -24,7 +24,7 @@ class MuralsServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testGetMuralsShouldPostFailedCallbackIfNoData() {
@@ -40,7 +40,7 @@ class MuralsServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     
@@ -58,7 +58,7 @@ class MuralsServiceTests: XCTestCase {
             
         }
         expectation.fulfill()
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testGetMuralsShouldPostFailedCallbackIfStatusTResponseIsfivehundred() {
@@ -75,7 +75,7 @@ class MuralsServiceTests: XCTestCase {
             
         }
         expectation.fulfill()
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func testGetMuralsShouldPostSuccessCallbackIfNoErrorAndCorrectData()  {
@@ -108,7 +108,7 @@ class MuralsServiceTests: XCTestCase {
             expectation.fulfill()
         }
         
-        wait(for: [expectation], timeout: 0.01)
+        wait(for: [expectation], timeout: 0.1)
     }
 
 }

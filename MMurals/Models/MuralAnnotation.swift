@@ -36,16 +36,13 @@ class MuralAnnotation: NSObject, MKAnnotation {
     /// Method that collect data from RealmDataBase and return [MuralAnnotation]
     static func getMuralAnnotationsList() -> [MuralAnnotation] {
         var muralAnnotationList : [MuralAnnotation] = []
-        // create a list of murals
-        let realm = try! Realm()
-        let muralsList = realm.objects(MuralRealm.self)
+        let muralsList = MuralRealm.all()
         
         for mural in muralsList {
             let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)
             let newMural = MuralAnnotation(coordinate: locatePoint.coordinate, title: mural.artist, subtitle: String(mural.year), id: mural.id)
             muralAnnotationList.append(newMural)
         }
-        
         return muralAnnotationList
     }
     
@@ -65,7 +62,6 @@ class MuralAnnotation: NSObject, MKAnnotation {
                     UIApplication.shared.open(url)
                 }
             }
-            
         }
         
     }

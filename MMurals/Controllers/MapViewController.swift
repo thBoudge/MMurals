@@ -57,12 +57,12 @@ final class MapViewController: UIViewController {
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
     
-    // MARK: prepare for Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        locationServ.locationManager.stopUpdatingLocation()
-//        locationManager.stopUpdatingLocation()
-    }
+//    // MARK: prepare for Segue
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////        locationServ.locationManager.stopUpdatingLocation()
+////        locationManager.stopUpdatingLocation()
+//    }
     // MARK: - Methods
     
     /// Create Annotation from [MuralAnnotation) and Add it to MapView
@@ -74,15 +74,7 @@ final class MapViewController: UIViewController {
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         
     }
-    
-//    /// Create a Region that will be show on MapView
-//    private func centerLocation(){
-//        let locationUser = locationServ.currentLocation.coordinate
-//        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//
-//        mapView.setRegion(region, animated: false)
-//
-//    }
+
     
 }
 
@@ -92,9 +84,7 @@ extension MapViewController: MKMapViewDelegate{
     
     // Methods that Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         MuralAnnotation.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
-        
     }
 }
 

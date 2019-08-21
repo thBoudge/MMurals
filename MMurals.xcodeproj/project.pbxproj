@@ -130,7 +130,6 @@
 				140D44CA22D93E2A0057F434 /* Ressources */,
 				140D44C722D93DD60057F434 /* Models */,
 				140D44C622D93DC00057F434 /* Controllers */,
-				140D44C822D93DEE0057F434 /* ViewModels */,
 				140D44C922D93E050057F434 /* Views */,
 				140D44C022D9390C0057F434 /* Info.plist */,
 				140D44B422D9390B0057F434 /* AppDelegate.swift */,
@@ -159,13 +158,6 @@
 				1467CB35230B577500AA8D8C /* LocationService.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		140D44C822D93DEE0057F434 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		140D44C922D93E050057F434 /* Views */ = {

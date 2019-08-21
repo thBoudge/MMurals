@@ -14,7 +14,6 @@ protocol LocationServiceDelegate {
     func onLocationUpdate(location: CLLocation)
     func onLocationDidFailWithError(error: Error)
     func onLocationHeadingUpdate(newHeading: CLHeading)
-    
 }
 
 class LocationService: NSObject, CLLocationManagerDelegate {
@@ -98,8 +97,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         }
         delegate.onLocationHeadingUpdate(newHeading: heading)
     }
-    
-    
     
     
 }

@@ -40,7 +40,9 @@ class CompassViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func goToRouteDirection(_ sender: UIButton) {
+        
         self.performSegue(withIdentifier: "RoutingViewSegue", sender: self)
+        
     }
     
     @IBAction func closeCompassPage(_ sender: UIButton) {
@@ -129,8 +131,6 @@ extension CompassViewController: LocationServiceDelegate {
     
     func onLocationUpdate(location: CLLocation) {
         print("Current Location : \(location)")
-        
-        //        locationServ.locationManager.stopUpdatingLocation()
         
     }
     
