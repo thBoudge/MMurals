@@ -12,6 +12,8 @@ import RealmSwift
 
 class MuralRealm: Object {
     
+  
+    
     // MARK: - Persisted Properties
     
     @objc dynamic var id : Int = 0
@@ -22,7 +24,12 @@ class MuralRealm: Object {
     @objc dynamic var longitude = 0.0
     @objc dynamic var latitude = 0.0
     
+    // MARK: - Static Method AllObjects
     
+    /// fetches all MuralRealm items from your default Realm file.
+    static func all(in realm: Realm = try! Realm()) -> Results<MuralRealm> {
+        return realm.objects(MuralRealm.self)
+    }
     
     // MARK: - Methods
     
@@ -53,7 +60,6 @@ class MuralRealm: Object {
             
             try! realm.write {
                 realm.add(muralToAdd)
-               
             }
         }
     }

@@ -21,12 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let date = UserDefaults.standard.object(forKey: "date") as? Date {
             let calendar = Date()
-            //                Calendar.current 79563.63482797146
-            //file:///var/mobile/Containers/Data/Application/2844032A-D042-4022-9855-D28C5917AF3E/Documents/default.realm
-            let dateInterval = calendar.timeIntervalSince(date) 
-//            print(date)
-//            print(calendar)
-//            print(dateInterval)
+            let dateInterval = calendar.timeIntervalSince(date)
             if dateInterval >= 1814400.0  {
                 UserDefaults.standard.removeObject(forKey: "date")
                 UserDefaults.standard.set(Date(), forKey: "date")
@@ -34,12 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
 
         }else{
-//            print("no userdefaults")
-//            print(Date())
             UserDefaults.standard.set(Date(), forKey: "date")
-            DispatchQueue.main.async {
-                self.loadMurals()
-            }
+            self.loadMurals()
          }
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")

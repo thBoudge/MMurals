@@ -7,6 +7,7 @@
 //
 
 import MapKit
+import RealmSwift
 
 final class MapViewController: UIViewController {
 
@@ -15,8 +16,7 @@ final class MapViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - Properties
-    
-//    let locationManager = CLLocationManager()
+
     let locationServ = LocationService.shared
     let regionRadius: CLLocationDistance = 5000.0
     // create a list of MuralAnnotation
@@ -26,16 +26,15 @@ final class MapViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationServ.delegate = self
-        
+        locationServ.authorisationDelegate = self
         addAnnotation()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        locationServ.locationManager.startUpdatingLocation()
+        locationServ.locationManager?.startUpdatingLocation()
         
     }
     
@@ -57,12 +56,12 @@ final class MapViewController: UIViewController {
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
     
-    // MARK: prepare for Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        locationServ.locationManager.stopUpdatingLocation()
-//        locationManager.stopUpdatingLocation()
-    }
+//    // MARK: prepare for Segue
+//
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+////        locationServ.locationManager.stopUpdatingLocation()
+////        locationManager.stopUpdatingLocation()
+//    }
     // MARK: - Methods
     
     /// Create Annotation from [MuralAnnotation) and Add it to MapView
@@ -74,15 +73,7 @@ final class MapViewController: UIViewController {
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
         
     }
-    
-//    /// Create a Region that will be show on MapView
-//    private func centerLocation(){
-//        let locationUser = locationServ.currentLocation.coordinate
-//        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-//
-//        mapView.setRegion(region, animated: false)
-//
-//    }
+
     
 }
 
@@ -93,28 +84,34 @@ extension MapViewController: MKMapViewDelegate{
     // Methods that Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         
-        MuralAnnotation.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
-        
+        MuralAnnotationView.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
     }
 }
 
 extension MapViewController: LocationServiceDelegate {
     
-    func onLocationHeadingUpdate(newHeading: CLHeading) {
-        //No need Here
-    }
+    func onLocationHeadingUpdate(newHeading: CLHeading) {}
     
     
     func onLocationUpdate(location: CLLocation) {
-        print("Current Location : \(location)")
         // Create a Region that will be show on MapView only when PageOpen and stop Update Location
         let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         mapView.setRegion(region, animated: false)
-        locationServ.locationManager.stopUpdatingLocation()
+        locationServ.locationManager?.stopUpdatingLocation()
         
     }
     
     func onLocationDidFailWithError(error: Error) {
         print("Error while trying to update device location : \(error)")
+    }
+}
+
+// MARK: - alertOn locatlisation Permission issue
+
+extension MapViewController : AlertSelectionDelegate {
+    func alertOn(name: String, description: String) {
+        let alertVC = UIAlertController(title: name, message: description, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
     }
 }
