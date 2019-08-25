@@ -35,9 +35,11 @@ class MuralRealm: Object {
     
     static func addMurals(mural: Mural, realm : Realm = try! Realm()){
 
+        print("6 ********")
         guard let muralsData = mural.features else {return}
-    
+    print("7 ********")
         for muralData in muralsData {
+            
             let muralToAdd = MuralRealm()
             
             guard let id = muralData.properties?.id else {return}
@@ -56,12 +58,13 @@ class MuralRealm: Object {
             muralToAdd.latitude = latitude
             muralToAdd.longitude = longitude
             
-            
+            print("8 ********")
             
             try! realm.write {
                 realm.add(muralToAdd)
             }
         }
+        print("7 ********")
     }
     
     

@@ -21,6 +21,8 @@ final class MapViewController: UIViewController {
     let regionRadius: CLLocationDistance = 5000.0
     // create a list of MuralAnnotation
     var muralAnnotationList : [MuralAnnotation] = []
+    // Alert Load data
+    let appDelegate = AppDelegate()
     
     // MARK: - ViewDidLoad
     
@@ -30,12 +32,15 @@ final class MapViewController: UIViewController {
         mapView.showsUserLocation = true
         locationServ.delegate = self
         locationServ.authorisationDelegate = self
-        addAnnotation()
+        appDelegate.authorisationDelegate = self
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.addAnnotation()
+        }
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         locationServ.locationManager?.startUpdatingLocation()
-        
     }
     
     // MARK: - IBACTION
@@ -110,8 +115,8 @@ extension MapViewController: LocationServiceDelegate {
 
 extension MapViewController : AlertSelectionDelegate {
     func alertOn(name: String, description: String) {
-        let alertVC = UIAlertController(title: name, message: description, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
+        let alertMVC = UIAlertController(title: name, message: description, preferredStyle: .alert)
+        alertMVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMVC, animated: true, completion: nil)
     }
 }

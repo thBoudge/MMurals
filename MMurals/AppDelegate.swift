@@ -15,10 +15,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     private let muralsService = MuralsService()
     let locationService = LocationService.shared
-
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    var authorisationDelegate : AlertSelectionDelegate?
+    
+    
+    func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         // Override point for customization after application launch.
-        
+       
         if let date = UserDefaults.standard.object(forKey: "date") as? Date {
             let calendar = Date()
             let dateInterval = calendar.timeIntervalSince(date)
@@ -27,25 +29,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UserDefaults.standard.set(Date(), forKey: "date")
                 loadMurals()
             }
-
+            
         }else{
             UserDefaults.standard.set(Date(), forKey: "date")
-            self.loadMurals()
-         }
+            loadMurals()
+        }
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")
         return true
     }
+
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        return true
+    }
     
     private func loadMurals(){
-        
-        muralsService.getMurals { (success, response) in
-            if success, let data = response  {
-                MuralRealm.addMurals(mural: data)
-            } else {
-                //create an alert
+            self.muralsService.getMurals { (success, response) in
+                if success, let data = response  {
+                    MuralRealm.addMurals(mural: data)
+                } else {
+                    //alert in case of no success or empty data
+                    self.authorisationDelegate?.alertOn(name: "Problem to dowLoad Data", description: "We could not dowload data, Please control that you are connected and start again MMurals")
+                }
             }
-        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
