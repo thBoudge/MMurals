@@ -32,22 +32,21 @@ class CompassViewController: UIViewController {
         
         compassMapView.showsUserLocation = true
         locationServ.delegate = self
-        locationServ.locationManager.startUpdatingHeading()
+        locationServ.locationManager?.startUpdatingHeading()
         centerLocation()
         addMuralsAnnotation()
+        
+        
     }
     
     // MARK: - IBAction
     
     @IBAction func goToRouteDirection(_ sender: UIButton) {
-        
         self.performSegue(withIdentifier: "RoutingViewSegue", sender: self)
-        
     }
     
     @IBAction func closeCompassPage(_ sender: UIButton) {
          self.performSegue(withIdentifier: "ReturnToMainPageSegue", sender: self)
-        
     }
     
     // MARK: prepare for Segue
@@ -58,12 +57,11 @@ class CompassViewController: UIViewController {
         let points = muralsVisitList()
         destinationVC.pointArray = points
         }
-        locationServ.locationManager.stopUpdatingHeading()
+        locationServ.locationManager?.stopUpdatingHeading()
      }
     
     // MARK: Methods
     
-   
     /// Method that create CLCircularRegion on top half screen in order to return [MuralAnnotation] (all muralAnnotation that are n that region
     private func getMuralsToVisit() -> [MuralAnnotation]{
         let x = compassMapView.frame.width / 2.0
@@ -87,10 +85,10 @@ class CompassViewController: UIViewController {
     func muralsVisitList() ->[MuralAnnotation]{
        
         var points : [MuralAnnotation] = []
-        let userPosition = locationServ.currentLocation.coordinate
-            let startPoint = MuralAnnotation(coordinate: userPosition, title: "Start Point", subtitle: "", id: 0)
-            points.append(startPoint)
-            points += getMuralsToVisit()
+        guard let userPosition = locationServ.currentLocation?.coordinate else {return []}
+        let startPoint = MuralAnnotation(coordinate: userPosition, title: "Start Point", subtitle: "", id: 0)
+        points.append(startPoint)
+        points += getMuralsToVisit()
         
         let sortedLocations = distanceLocation.locationsSortedByDistanceFromPreviousLocation(locations: points)
         return sortedLocations
@@ -99,11 +97,11 @@ class CompassViewController: UIViewController {
     /// Create a Region that will be show on MapView
     private func centerLocation(){
         // create a region
-        let locationUser = locationServ.currentLocation.coordinate
-            let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        guard let locationUser = locationServ.currentLocation?.coordinate else {return}
+        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
             
-            //we pass region to MapView
-            compassMapView.setRegion(region, animated: true)
+        //we pass region to MapView
+        compassMapView.setRegion(region, animated: true)
         
     }
     
@@ -122,6 +120,7 @@ extension CompassViewController: LocationServiceDelegate {
     func onLocationHeadingUpdate(newHeading: CLHeading) {
         //  let angle = newHeading.trueHeading * .pi / 180
         // Annimation to turn map when we turn devise
+        print("heading:  \(newHeading)")
         UIView.animate(withDuration: 0.5) {
             self.compassMapView.camera.heading = newHeading.magneticHeading
         }
@@ -148,7 +147,7 @@ extension CompassViewController: LocationServiceDelegate {
             let timeHour =  time / 3600
             let timeMinutes =  time % 3600 / 60
             numberMuralLabel.text = "Murals: \(pointsSorted.count - 1)"
-            timeVisitLabel.text = "Distance: \(timeHour)h \(timeMinutes)min"
+            timeVisitLabel.text = "Time: \(timeHour)h \(timeMinutes)min"
         }else{
             numberMuralLabel.text = "Murals: none"
             timeVisitLabel.text = ""

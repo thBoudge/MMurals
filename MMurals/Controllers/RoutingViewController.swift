@@ -28,7 +28,7 @@ final class RoutingViewController: UIViewController {
         routingMapView.showsUserLocation = true
         locationServ.delegate = self
         
-        let locationUser = locationServ.currentLocation.coordinate
+        guard let locationUser = locationServ.currentLocation?.coordinate else {return}
         let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
         routingMapView.setRegion(region, animated: true)
@@ -71,9 +71,8 @@ final class RoutingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //arréter localisation
     }
+    
     // MARK: - Methods
-    
-    
     
     /// create a route polyline between each Mural to visit and show it on MapView
     private func getDirections(sortedLocations : [MuralAnnotation]){
@@ -129,7 +128,7 @@ extension RoutingViewController: MKMapViewDelegate {
     
     // Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        MuralAnnotation.didSelectAnnotation(view: view, pointArray: pointArray)
+        MuralAnnotationView.didSelectAnnotation(view: view, pointArray: pointArray)
     }
     
 }
@@ -148,3 +147,4 @@ extension RoutingViewController: LocationServiceDelegate {
         print("Error while trying to update device location : \(error)")
     }
 }
+

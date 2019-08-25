@@ -46,24 +46,4 @@ class MuralAnnotation: NSObject, MKAnnotation {
         return muralAnnotationList
     }
     
-    /// Method that open a page from URL (imageUrl)
-    static func didSelectAnnotation(view: MKAnnotationView, pointArray: [MuralAnnotation]?){
-        
-        guard let muralCoordinate = view.annotation?.coordinate else {return}
-        
-        guard let muralsPoints = pointArray  else {return}
-        
-        for coordinatePoint in muralsPoints {
-            
-            if muralCoordinate.latitude == coordinatePoint.coordinate.latitude && muralCoordinate.longitude == coordinatePoint.coordinate.longitude && coordinatePoint.id != 0 {
-                
-                guard let urlString = coordinatePoint.imageUrl else {return}
-                if let url = URL(string: urlString) {
-                    UIApplication.shared.open(url)
-                }
-            }
-        }
-        
-    }
-    
 }

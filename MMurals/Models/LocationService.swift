@@ -10,20 +10,32 @@
 import Foundation
 import CoreLocation
 
+//// Protocol for all alert MMurals Application
+protocol AlertSelectionDelegate {
+    func alertOn (name: String, description: String)
+}
+
 protocol LocationServiceDelegate {
+    /// Method that return present user Location CLLocation
     func onLocationUpdate(location: CLLocation)
+    /// Method that return Error if necessary
     func onLocationDidFailWithError(error: Error)
+    /// Method that return user Orientation CLHeading
     func onLocationHeadingUpdate(newHeading: CLHeading)
 }
 
 class LocationService: NSObject, CLLocationManagerDelegate {
     
+    // MARK:
+    
     public static let shared = LocationService()
     
     var delegate: LocationServiceDelegate?
-    var locationManager: CLLocationManager!
-    var currentLocation: CLLocation!
-    var currentHeading: CLHeading!
+    var locationManager: CLLocationManager?
+    var currentLocation: CLLocation?
+    var currentHeading: CLHeading?
+    var authorisationDelegate : AlertSelectionDelegate?
+    
     
     private override init() {
         super.init()
@@ -32,13 +44,16 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func initializeLocationServices() {
         self.locationManager = CLLocationManager()
-        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        self.locationManager.requestWhenInUseAuthorization()
-        // Voir C'est quoi ?
-        self.locationManager.pausesLocationUpdatesAutomatically = false
-        self.locationManager.delegate = self
-        self.locationManager.startUpdatingLocation()
-        self.locationManager.startUpdatingHeading()
+        guard ((self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest) != nil) else {return}
+        guard ((self.locationManager?.requestWhenInUseAuthorization()) != nil) else {return}
+//        // Voir C'est quoi ?
+//        self.locationManager.pausesLocationUpdatesAutomatically = false
+        guard ((self.locationManager?.delegate = self) != nil) else {return}
+//        self.locationManager.delegate = self
+         guard ((self.locationManager?.startUpdatingLocation()) != nil) else {return}
+//        self.locationManager.startUpdatingLocation()
+        guard ((self.locationManager?.startUpdatingHeading()) != nil) else {return}
+//        self.locationManager.startUpdatingHeading()
         
     }
     
@@ -46,15 +61,16 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         switch status {
         case .restricted:
             // show an alert letting user know how to turn on permissions
+            authorisationDelegate?.alertOn(name: "Permission to localisation restricted!", description: "Please go to setting , Choose MMurals app's and change localisation to authorizedWhenInUse")
             print("User restricted access to location.")
         case .denied:
             // show an alert letting user know how to turn on permissions
+            authorisationDelegate?.alertOn(name: "Permission to localisation denied!", description: "Please go to setting , Choose MMurals app's and change localisation to authorizedWhenInUse")
             print("User denied access to location.")
         case .notDetermined:
-            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager?.requestWhenInUseAuthorization()
         case .authorizedAlways: break
         case .authorizedWhenInUse:
-            
             print("User choosed locatiom when app is in use.")
         default:
             print("Unhandled error occured.")
@@ -62,8 +78,10 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        self.currentLocation = locations.last!
-        locationChanged(location: currentLocation)
+        guard let location = locations.last else { return }
+        print("The location is: \(location)")
+        self.currentLocation = location
+        locationChanged(location: location)
     }
     
     private func locationChanged(location: CLLocation) {
@@ -74,7 +92,8 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationManager.stopUpdatingLocation()
+        self.locationManager?.stopUpdatingLocation()
+        print("Error: \(error)")
         locationFailed(error: error)
     }
     
@@ -87,7 +106,8 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
         self.currentHeading = newHeading
-        headingChanged(heading: currentHeading)
+        guard let heading = currentHeading else {return}
+        headingChanged(heading: heading)
     }
     
     

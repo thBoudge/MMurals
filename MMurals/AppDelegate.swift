@@ -30,9 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         }else{
             UserDefaults.standard.set(Date(), forKey: "date")
-            DispatchQueue.main.async {
-                self.loadMurals()
-            }
+            self.loadMurals()
          }
         //MARK: - Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")

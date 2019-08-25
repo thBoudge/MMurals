@@ -9,26 +9,27 @@
 import Foundation
 
 class MuralsService {
-    //MARK: Properties
+    
+    // MARK: - Properties
+    
     private let muralURL = URL(string: valueForAPI(named: "MuralAPI"))!
     
     private var task : URLSessionDataTask?
     
     private var muralSession : URLSession
     
-    //Mark: Init()
+    // Mark: - Init()
+    
     init(muralSession: URLSession = URLSession(configuration: .default)) {
         self.muralSession = muralSession
     }
     
-    //MARK: Methods
-    //Methods That called and return response
+    // MARK: - Methods
+    
+    /// Methods That called and return response as Mural
     func getMurals(callback: @escaping (Bool, Mural?) -> Void) {
         
         let request = URLRequest(url: muralURL)
-        
-//        print(request)
-        
         task?.cancel()
         
         task = muralSession.dataTask(with: request){ (data, response, error) in
@@ -48,16 +49,11 @@ class MuralsService {
                 
                 // MARK: - 5 Translation JSON in String
                 if let responseJSON = try? JSONDecoder().decode(Mural.self, from: data){
-//                    print(responseJSON)
-//                    let value = responseJSON.rates[self.symbols]
                     let value = responseJSON 
                     callback(true,value)
-//                    print(value!)
                 }
             }
         }
-        
         task?.resume()
-        
     }
 }

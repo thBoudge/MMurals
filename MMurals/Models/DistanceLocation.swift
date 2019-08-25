@@ -38,7 +38,7 @@ class DistanceLocation {
         var distance = 1500000.0
         var closureLocation : MuralAnnotation?
         
-        //create a [] without location already sorted
+        //create a [MuralAnnotation] without location already sorted
         let muralspoint = muralsLocation.filter { (muralpoint) -> Bool in
             var alreadySorted = false
             for point in sortedPoint{
