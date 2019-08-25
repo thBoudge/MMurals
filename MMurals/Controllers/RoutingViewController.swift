@@ -28,7 +28,7 @@ final class RoutingViewController: UIViewController {
         routingMapView.showsUserLocation = true
         locationServ.delegate = self
         
-        let locationUser = locationServ.currentLocation.coordinate
+        guard let locationUser = locationServ.currentLocation?.coordinate else {return}
         let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
         
         routingMapView.setRegion(region, animated: true)
@@ -71,30 +71,28 @@ final class RoutingViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //arréter localisation
     }
+    
     // MARK: - Methods
-    
-    
     
     /// create a route polyline between each Mural to visit and show it on MapView
     private func getDirections(sortedLocations : [MuralAnnotation]){
-        
-        for i in 0 ..< sortedLocations.count - 1 {
-            var muralsDirection : [CLLocationCoordinate2D] = []
-            muralsDirection.append(sortedLocations[i].coordinate)
-            muralsDirection.append(sortedLocations[i + 1].coordinate)
-            
-            let request = createDirectionRequest(coordinates: muralsDirection)
-            let directions = MKDirections(request: request)
-            directions.calculate { (response, error) in
-                guard let response = response else {return}
+        if sortedLocations.count >= 1 {
+            for i in 0 ..< sortedLocations.count - 1 {
+                var muralsDirection : [CLLocationCoordinate2D] = []
+                muralsDirection.append(sortedLocations[i].coordinate)
+                muralsDirection.append(sortedLocations[i + 1].coordinate)
                 
-                for route in response.routes {
-                    self.routingMapView.addOverlay(route.polyline)
-                    //show all the map surronding the direction
-//                self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                let request = createDirectionRequest(coordinates: muralsDirection)
+                let directions = MKDirections(request: request)
+                directions.calculate { (response, error) in
+                    guard let response = response else {return}
+                    
+                    for route in response.routes {
+                        self.routingMapView.addOverlay(route.polyline)
+                    }
                 }
+                
             }
-            
         }
     }
 
@@ -130,7 +128,7 @@ extension RoutingViewController: MKMapViewDelegate {
     
     // Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        MuralAnnotation.didSelectAnnotation(view: view, pointArray: pointArray)
+        MuralAnnotationView.didSelectAnnotation(view: view, pointArray: pointArray)
     }
     
 }
@@ -138,17 +136,15 @@ extension RoutingViewController: MKMapViewDelegate {
 extension RoutingViewController: LocationServiceDelegate {
    
     func onLocationHeadingUpdate(newHeading: CLHeading) {
-        
     }
     
     
     func onLocationUpdate(location: CLLocation) {
         print("Current Location : \(location)")
-        
-        
     }
     
     func onLocationDidFailWithError(error: Error) {
         print("Error while trying to update device location : \(error)")
     }
 }
+

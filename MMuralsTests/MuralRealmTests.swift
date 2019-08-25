@@ -12,14 +12,14 @@ import RealmSwift
 
 class MuralRealmTests: XCTestCase {
 
-    var realm: Realm!
+    var realmTest: Realm!
+    let configuration = Realm.Configuration( inMemoryIdentifier: "test", schemaVersion: 1 )
     
     override func setUp() {
         super.setUp()
-        
-        let configuration = Realm.Configuration( inMemoryIdentifier: "test", schemaVersion: 1 )
-                realm = try! Realm(configuration: configuration)
-                insertMurals()
+        realmTest = try! Realm()
+        guard realmTest.isEmpty else { return }
+       
         
     }
 
@@ -31,37 +31,19 @@ class MuralRealmTests: XCTestCase {
         let muralsService = MuralsService(muralSession: URLSessionFake(data: FakeMuralsResponseData.responseCorrectData, response: FakeMuralsResponseData.responseOk, error: nil))
 
         muralsService.getMurals  { (success, response) in
-            
             guard let data = response else {return}
-            print(data)
-            MuralRealm.addMurals(mural: data, realm: self.realm)
-            print(self.realm.objects(MuralRealm.self).count)
-            
-           
+            MuralRealm.addMurals(mural: data, realm: self.realmTest)
         }
-        
-       
-    }
+     }
     
     func testGetMuralsShouldAddDataToBDRealm() {
-        
-        
-
-       // When
-       
+        insertMurals()
         let expectation = XCTestExpectation(description: "wait for queue")
-
-
-            let mural = realm.objects(MuralRealm.self)
-            print("plouf")
-            print(mural)
-            print("plouf")
-
-            let artist = mural[1].artist
-
-            XCTAssertEqual("Simon Bachand et Jasmin Guérard-Alie", artist)
-
+        let mural = MuralRealm.all(in: realmTest)
+        let artist = mural[1].artist
         expectation.fulfill()
+        
+        XCTAssertEqual("Simon Bachand et Jasmin Guérard-Alie", artist)
         wait(for: [expectation], timeout: 1)
        
     }
