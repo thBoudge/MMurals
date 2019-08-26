@@ -26,6 +26,9 @@
 		1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */; };
 		1467CB2B230AFD5500AA8D8C /* LocalisationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467CB2A230AFD5500AA8D8C /* LocalisationMapView.swift */; };
 		1467CB36230B577500AA8D8C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467CB35230B577500AA8D8C /* LocationService.swift */; };
+		14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855EF231486B5008CF5B7 /* LocationManager.swift */; };
+		14A855F423148715008CF5B7 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F323148715008CF5B7 /* MockLocationManager.swift */; };
+		14A855F6231487DE008CF5B7 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */; };
 		14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */; };
 		14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D646F62307423900E5F4D9 /* CompassViewController.swift */; };
 		14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56B22F344860006A793 /* MuralAnnotationView.swift */; };
@@ -71,6 +74,9 @@
 		1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsServiceTests.swift; sourceTree = "<group>"; };
 		1467CB2A230AFD5500AA8D8C /* LocalisationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationMapView.swift; sourceTree = "<group>"; };
 		1467CB35230B577500AA8D8C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		14A855EF231486B5008CF5B7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		14A855F323148715008CF5B7 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
+		14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealmTests.swift; sourceTree = "<group>"; };
 		14D646F62307423900E5F4D9 /* CompassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassViewController.swift; sourceTree = "<group>"; };
 		14DCB56B22F344860006A793 /* MuralAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationView.swift; sourceTree = "<group>"; };
@@ -156,6 +162,7 @@
 				14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */,
 				14069E2022FB6E80009A413F /* DistanceLocation.swift */,
 				1467CB35230B577500AA8D8C /* LocationService.swift */,
+				14A855EF231486B5008CF5B7 /* LocationManager.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -197,9 +204,11 @@
 				1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */,
 				14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */,
 				141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */,
+				14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */,
 				1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */,
 				1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */,
 				1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */,
+				14A855F323148715008CF5B7 /* MockLocationManager.swift */,
 				1437B90822DE355E0073A8D2 /* Info.plist */,
 			);
 			path = MMuralsTests;
@@ -458,6 +467,7 @@
 			files = (
 				14DCB56E22F348900006A793 /* ClusterView.swift in Sources */,
 				14069E2122FB6E80009A413F /* DistanceLocation.swift in Sources */,
+				14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */,
 				140D44D222D9426F0057F434 /* MuralsService.swift in Sources */,
 				14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */,
 				1467CB2B230AFD5500AA8D8C /* LocalisationMapView.swift in Sources */,
@@ -479,6 +489,8 @@
 			files = (
 				1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */,
 				14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */,
+				14A855F6231487DE008CF5B7 /* LocationServiceTests.swift in Sources */,
+				14A855F423148715008CF5B7 /* MockLocationManager.swift in Sources */,
 				1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */,
 				141CB1C0230C88FF00C6A970 /* DistanceLocationTests.swift in Sources */,
 				141CB1BE230C821000C6A970 /* MuralAnnotationTests.swift in Sources */,

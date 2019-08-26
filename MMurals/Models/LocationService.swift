@@ -31,20 +31,37 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     public static let shared = LocationService()
     
     var delegate: LocationServiceDelegate?
-    var locationManager: CLLocationManager?
+    var locationManager: LocationManager?
     var currentLocation: CLLocation?
     var currentHeading: CLHeading?
     var authorisationDelegate : AlertSelectionDelegate?
     
+    init(locationManager: LocationManager = CLLocationManager()) {
+        self.locationManager = locationManager
+    }
     
     private override init() {
         super.init()
         self.initializeLocationServices()
     }
     
+    convenience init(locationManagerTest: LocationManager ) {
+        self.init(locationManager:locationManagerTest)
+        //        self.init()
+        //        locationManager = locationManagerTest
+        guard let lat = self.locationManager?.location?.coordinate.latitude else {return}
+        guard let long = self.locationManager?.location?.coordinate.longitude else {return}
+        print("location: \(long)")
+        self.locationManager?.requestLocation()
+        locationChanged(location: CLLocation(latitude: lat, longitude: long))
+        
+        self.locationManager?.delegate = self
+        //
+    }
+    
     func initializeLocationServices() {
         self.locationManager = CLLocationManager()
-        guard ((self.locationManager?.desiredAccuracy = kCLLocationAccuracyBest) != nil) else {return}
+        guard ((self.locationManager?.distanceFilter = kCLLocationAccuracyBest) != nil) else {return}
         guard ((self.locationManager?.requestWhenInUseAuthorization()) != nil) else {return}
 //        // Voir C'est quoi ?
 //        self.locationManager.pausesLocationUpdatesAutomatically = false
