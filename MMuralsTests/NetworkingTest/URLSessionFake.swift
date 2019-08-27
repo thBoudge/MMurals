@@ -8,18 +8,26 @@
 
 import Foundation
 
+// MARK: - URLSessionFake
 
 class URLSessionFake: URLSession {
+    
+    // MARK: - Properties
+
     var data: Data?
     var response: URLResponse?
     var error: Error?
     
+    // MARK: - Init()
+
     init(data: Data?, response: URLResponse?, error: Error?) {
         self.data = data
         self.response = response
         self.error = error
     }
     
+    // MARK: - Override URLSession
+
     override func dataTask(with url: URL, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let task = URLSessionDataTaskFake()
         task.completionHandler = completionHandler
@@ -39,12 +47,21 @@ class URLSessionFake: URLSession {
     }
 }
 
+
+// MARK: - URLSessionDataTaskFake
+
+
 class URLSessionDataTaskFake: URLSessionDataTask {
+    
+    // MARK: - Properties
+
     var completionHandler: ((Data?, URLResponse?, Error?) -> Void)?
     var data: Data?
     var urlResponse: URLResponse?
     var responseError: Error?
     
+    // MARK: - Override URLSessionDataTask
+
     override func resume() {
         completionHandler?(data, urlResponse, responseError)
     }

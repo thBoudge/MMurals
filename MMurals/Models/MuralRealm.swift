@@ -12,8 +12,6 @@ import RealmSwift
 
 class MuralRealm: Object {
     
-  
-    
     // MARK: - Persisted Properties
     
     @objc dynamic var id : Int = 0
@@ -26,7 +24,7 @@ class MuralRealm: Object {
     
     // MARK: - Static Method AllObjects
     
-    /// fetches all MuralRealm items from your default Realm file.
+    /// Fetches all MuralRealm items from your default Realm file.
     static func all(in realm: Realm = try! Realm()) -> Results<MuralRealm> {
         return realm.objects(MuralRealm.self)
     }
@@ -34,10 +32,9 @@ class MuralRealm: Object {
     // MARK: - Methods
     
     static func addMurals(mural: Mural, realm : Realm = try! Realm()){
-
         guard let muralsData = mural.features else {return}
-    
         for muralData in muralsData {
+            
             let muralToAdd = MuralRealm()
             
             guard let id = muralData.properties?.id else {return}
@@ -56,16 +53,11 @@ class MuralRealm: Object {
             muralToAdd.latitude = latitude
             muralToAdd.longitude = longitude
             
-            
-            
             try! realm.write {
                 realm.add(muralToAdd)
             }
         }
     }
-    
-    
-    
 }
 
 

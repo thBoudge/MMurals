@@ -10,6 +10,8 @@ import Foundation
 
 class FakeMuralsResponseData {
     
+    // MARK: - Properties
+
     static let responseOk = HTTPURLResponse(url: URL(string: "http://pointpotn.com/")!, statusCode: 200, httpVersion: nil, headerFields: nil)!
     
     static let responseNot = HTTPURLResponse(url: URL(string: "http://pointpotn.com/")!, statusCode: 500, httpVersion: nil, headerFields: nil)!
