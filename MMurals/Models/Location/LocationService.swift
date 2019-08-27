@@ -5,16 +5,19 @@
 //  Created by Thomas Bouges on 2019-08-19.
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
-// https://stackoverflow.com/questions/55933283/location-service-as-a-singleton-in-swift-get-stuck-on-when-in-use
+// HelpSource : https://stackoverflow.com/questions/55933283/location-service-as-a-singleton-in-swift-get-stuck-on-when-in-use
 
 import Foundation
 import CoreLocation
+
+// MARK: - Protocols
 
 //// Protocol for all alert MMurals Application
 protocol AlertSelectionDelegate {
     func alertOn (name: String, description: String)
 }
 
+//// Protocol to update location + Heading + Error
 protocol LocationServiceDelegate {
     /// Method that return present user Location CLLocation
     func onLocationUpdate(location: CLLocation)
@@ -24,11 +27,15 @@ protocol LocationServiceDelegate {
     func onLocationHeadingUpdate(newHeading: CLHeading)
 }
 
+// MARK: - Class LocationService
+
 class LocationService: NSObject, CLLocationManagerDelegate {
     
-    // MARK:
+    // MARK: - Singleton
     
     public static let shared = LocationService()
+    
+    // MARK: - Properties
     
     var delegate: LocationServiceDelegate?
     var locationManager: LocationManager?
@@ -36,43 +43,28 @@ class LocationService: NSObject, CLLocationManagerDelegate {
     var currentHeading: CLHeading?
     var authorisationDelegate : AlertSelectionDelegate?
     
+    // MARK: - init()
+    
     init(locationManager: LocationManager = CLLocationManager()) {
         self.locationManager = locationManager
     }
+    
+    // MARK: - Singleton init()
     
     private override init() {
         super.init()
         self.initializeLocationServices()
     }
     
+    // MARK: - Test Convenience init()
+    
     convenience init(locationManagerTest: LocationManager ) {
         self.init(locationManager:locationManagerTest)
-        //        self.init()
-        //        locationManager = locationManagerTest
-        guard let lat = self.locationManager?.location?.coordinate.latitude else {return}
-        guard let long = self.locationManager?.location?.coordinate.longitude else {return}
-        print("location: \(long)")
         self.locationManager?.requestLocation()
-        locationChanged(location: CLLocation(latitude: lat, longitude: long))
-        
         self.locationManager?.delegate = self
-        //
     }
     
-    func initializeLocationServices() {
-        self.locationManager = CLLocationManager()
-        guard ((self.locationManager?.distanceFilter = kCLLocationAccuracyBest) != nil) else {return}
-        guard ((self.locationManager?.requestWhenInUseAuthorization()) != nil) else {return}
-//        // Voir C'est quoi ?
-//        self.locationManager.pausesLocationUpdatesAutomatically = false
-        guard ((self.locationManager?.delegate = self) != nil) else {return}
-//        self.locationManager.delegate = self
-         guard ((self.locationManager?.startUpdatingLocation()) != nil) else {return}
-//        self.locationManager.startUpdatingLocation()
-        guard ((self.locationManager?.startUpdatingHeading()) != nil) else {return}
-//        self.locationManager.startUpdatingHeading()
-        
-    }
+    // MARK: - CLLocationManagerDelegate Methods
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -101,17 +93,25 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         locationChanged(location: location)
     }
     
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        self.locationManager?.stopUpdatingLocation()
+        print("Error: \(error)")
+        locationFailed(error: error)
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
+        self.currentHeading = newHeading
+        guard let heading = currentHeading else {return}
+        headingChanged(heading: heading)
+    }
+    
+    // MARK: - Methods
+    
     private func locationChanged(location: CLLocation) {
         guard let delegate = self.delegate else {
             return
         }
         delegate.onLocationUpdate(location: location)
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        self.locationManager?.stopUpdatingLocation()
-        print("Error: \(error)")
-        locationFailed(error: error)
     }
     
     private func locationFailed(error: Error) {
@@ -121,13 +121,6 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         delegate.onLocationDidFailWithError(error: error)
     }
     
-    func locationManager(_ manager: CLLocationManager, didUpdateHeading newHeading: CLHeading) {
-        self.currentHeading = newHeading
-        guard let heading = currentHeading else {return}
-        headingChanged(heading: heading)
-    }
-    
-    
     private func headingChanged(heading: CLHeading){
         guard let delegate = self.delegate else {
             return
@@ -135,5 +128,13 @@ class LocationService: NSObject, CLLocationManagerDelegate {
         delegate.onLocationHeadingUpdate(newHeading: heading)
     }
     
-    
+    private func initializeLocationServices() {
+        self.locationManager = CLLocationManager()
+        self.locationManager?.distanceFilter = kCLLocationAccuracyBest
+        self.locationManager?.requestWhenInUseAuthorization()
+        self.locationManager?.delegate = self
+        self.locationManager?.startUpdatingLocation()
+        self.locationManager?.startUpdatingHeading()
+        
+    }
 }

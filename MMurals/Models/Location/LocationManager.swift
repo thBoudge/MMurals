@@ -9,18 +9,16 @@
 import Foundation
 import CoreLocation
 
+/// Protocol that create Location sinmilar to CLLocationManager
 protocol LocationManager {
     
-    // CLLocationManager Properties
+    // MARK: - CLLocationManager Properties
+    
     var location: CLLocation? { get }
-//    var heading: CLHeading? { get }
-//    var delegate: CLLocationManagerDelegate? { get set }
     var delegate: CLLocationManagerDelegate? { get set }
     var distanceFilter: CLLocationDistance { get set }
-//    var pausesLocationUpdatesAutomatically: Bool { get set }
-//    var allowsBackgroundLocationUpdates: Bool { get set }
     
-    // CLLocationManager Methods
+    // MARK: - CLLocationManager Methods
     func requestWhenInUseAuthorization()
     func startUpdatingLocation()
     func stopUpdatingLocation()
@@ -28,18 +26,20 @@ protocol LocationManager {
     func stopUpdatingHeading()
     func requestLocation()
     
-    // Wrappers for CLLocationManager class functions.
+    // // MARK: - Wrappers for CLLocationManager class functions.
     func getAuthorizationStatus() -> CLAuthorizationStatus
     func isLocationServicesEnabled() -> Bool
 }
 
+// MARK: - Extension CLLocationManager
+// Extension CLLocationManager with LocotionManager Protocola
 extension CLLocationManager: LocationManager {
     
-    
+    /// return CLAuthorizationStatus from LocationManager
     func getAuthorizationStatus() -> CLAuthorizationStatus {
         return CLLocationManager.authorizationStatus()
     }
-    
+    /// return Bolean from LocationManager to know if user isEnabled or not
     func isLocationServicesEnabled() -> Bool {
         return CLLocationManager.locationServicesEnabled()
     }

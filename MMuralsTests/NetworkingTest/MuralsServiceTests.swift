@@ -11,6 +11,8 @@ import XCTest
 
 class MuralsServiceTests: XCTestCase {
     
+    // MARK: - Test Methods
+    
     func testGetMuralsShouldPostFailedCallback() {
         // Given
         let muralsService = MuralsService(muralSession: URLSessionFake(data: nil, response: nil, error: FakeMuralsResponseData.error))
@@ -18,7 +20,7 @@ class MuralsServiceTests: XCTestCase {
         // When
         let expectation = XCTestExpectation(description: "Wait for queue change.")
         muralsService.getMurals { (success, response) in
-            // Then
+        // Then
             XCTAssertFalse(success)
             XCTAssertNil(response)
             expectation.fulfill()

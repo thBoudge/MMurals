@@ -9,9 +9,9 @@
 import MapKit
 import RealmSwift
 
-final class MapViewController: UIViewController {
+class MapViewController: UIViewController {
 
-    // MARK: - Oulets
+    // MARK: - Outlets
     
     @IBOutlet weak var mapView: MKMapView!
     
@@ -38,6 +38,7 @@ final class MapViewController: UIViewController {
         }
     }
     
+    // MARK: - ViewDidAppear
     
     override func viewDidAppear(_ animated: Bool) {
         locationServ.locationManager?.startUpdatingLocation()
@@ -45,7 +46,7 @@ final class MapViewController: UIViewController {
     
     // MARK: - IBACTION
     
-    // change Map type fom Standard to satellite
+    // Change Map type fom Standard to satellite
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
@@ -55,43 +56,33 @@ final class MapViewController: UIViewController {
         }
     }
     
-    
+    // open page CompassViewController
     @IBAction func getDirectionMap(_ sender: UIButton) {
-        
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
     
-//    // MARK: prepare for Segue
-//
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-////        locationServ.locationManager.stopUpdatingLocation()
-////        locationManager.stopUpdatingLocation()
-//    }
     // MARK: - Methods
     
     /// Create Annotation from [MuralAnnotation) and Add it to MapView
     private func addAnnotation(){
-        
         muralAnnotationList = MuralAnnotation.getMuralAnnotationsList()
         mapView.addAnnotations(self.muralAnnotationList)
         mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-        
     }
-
-    
 }
 
-// MARK: - MKMaViewDelegate extension
+// MARK: - MKMapViewDelegate extension
 
 extension MapViewController: MKMapViewDelegate{
     
     // Methods that Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
         MuralAnnotationView.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
     }
 }
+
+// MARK: - LocationServiceDelegate Extension 
 
 extension MapViewController: LocationServiceDelegate {
     

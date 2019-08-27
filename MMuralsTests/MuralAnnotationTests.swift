@@ -8,24 +8,48 @@
 
 import XCTest
 import CoreLocation
+import RealmSwift
 @testable import MMurals
 
 class MuralAnnotationTests: XCTestCase {
 
+    // MARK: - Properties
+
     var muralAnnotationsList : [MuralAnnotation] = []
+    var realmTest: Realm!
+    let configuration = Realm.Configuration( inMemoryIdentifier: "test", schemaVersion: 1 )
+    
+    // MARK: - SETUP
     
     override func setUp() {
-        
-        let mural1 = MuralAnnotation(coordinate: CLLocationCoordinate2D(latitude: 45.506855, longitude: -73.558029), title: "Simon Bachand et Jasmin Guérard-Alie", subtitle: "2007", id: 2)
-        let mural2 = MuralAnnotation(coordinate: CLLocationCoordinate2D(latitude: 45.510131, longitude: -73.563033), title: "Simon Bachand et Jasmin Guérard-Alie", subtitle: "2008", id: 6)
-        let mural3 = MuralAnnotation(coordinate: CLLocationCoordinate2D(latitude: 45.52159, longitude: -73.552993), title: "Jasmin Guérard-Alie et Simon Bachand ", subtitle: "2008", id:  7)
-        let mural4 = MuralAnnotation(coordinate: CLLocationCoordinate2D(latitude: 45.512805, longitude: -73.563467), title: "Phillip Adams et David Guinn", subtitle: "2009", id: 8)
-        muralAnnotationsList.append(mural1)
-        muralAnnotationsList.append(mural2)
-        muralAnnotationsList.append(mural3)
-        muralAnnotationsList.append(mural4)
+        super.setUp()
+        realmTest = try! Realm()
+        guard realmTest.isEmpty else { return }
     }
-
- 
+    //MARK: - Helper Methods
+    
+    private func insertMurals() {
+        
+        let muralsService = MuralsService(muralSession: URLSessionFake(data: FakeMuralsResponseData.responseCorrectData, response: FakeMuralsResponseData.responseOk, error: nil))
+        
+        muralsService.getMurals  { (success, response) in
+            guard let data = response else {return}
+            MuralRealm.addMurals(mural: data, realm: self.realmTest)
+        }
+    }
+    
+    // MARK: - Test Methods
+    
+    func testGetMuralsAnnotationsFromRealmAndReturnListAnnotations() {
+        insertMurals()
+        let expectation = XCTestExpectation(description: "wait for queue")
+        muralAnnotationsList = MuralAnnotation.getMuralAnnotationsList()
+        let title = muralAnnotationsList[1].title
+        expectation.fulfill()
+        
+        XCTAssertEqual("Simon Bachand et Jasmin Guérard-Alie", title)
+        wait(for: [expectation], timeout: 1)
+        
+    }
 
 }

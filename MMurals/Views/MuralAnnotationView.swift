@@ -6,17 +6,16 @@
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
-import UIKit
 import MapKit
-import RealmSwift
 
 class MuralAnnotationView: MKMarkerAnnotationView {
 
+    // MARK: - Annotation Propertie
+    
     override var annotation: MKAnnotation?{
         
         willSet{
              if let muralAnnotation = newValue as? MuralAnnotation {
-            //add an emoji as pointform
                 let image = UIImage(named: "muralPoint")
                 let startImage = UIImage(named: "standing-up-man-")
                 glyphTintColor = .purple
@@ -34,15 +33,14 @@ class MuralAnnotationView: MKMarkerAnnotationView {
 
     }
     
+    // MARK: - Methods
+    
     /// Method that open a page from URL (MuralRealm.imageUrl)
     static func didSelectAnnotation(view: MKAnnotationView, pointArray: [MuralAnnotation]?){
-        
         guard let muralCoordinate = view.annotation?.coordinate else {return}
-        
         guard let muralsPoints = pointArray  else {return}
         
         for coordinatePoint in muralsPoints {
-            
             if muralCoordinate.latitude == coordinatePoint.coordinate.latitude && muralCoordinate.longitude == coordinatePoint.coordinate.longitude && coordinatePoint.id != 0 {
                 
                 guard let urlString = coordinatePoint.imageUrl else {return}
@@ -51,7 +49,6 @@ class MuralAnnotationView: MKMarkerAnnotationView {
                 }
             }
         }
-        
     }
     
 
