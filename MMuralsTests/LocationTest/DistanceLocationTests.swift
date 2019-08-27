@@ -14,10 +14,10 @@ class DistanceLocationTests: XCTestCase {
     
     // MARK: - Properties
 
-    var muralAnnotationsList : [MuralAnnotation] = []
-    let distanceLocation = DistanceLocation()
+    private var muralAnnotationsList : [MuralAnnotation] = []
+    private let distanceLocation = DistanceLocation()
     
-    // MARK: - setUP
+    // MARK: - SETUP
     
     override func setUp() {
         

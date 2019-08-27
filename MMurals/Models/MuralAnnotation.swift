@@ -19,7 +19,6 @@ class MuralAnnotation: NSObject, MKAnnotation {
     var title: String?
     var imageUrl : String?
 
-    
     // MARK: - Init
     
     init(coordinate: CLLocationCoordinate2D, title: String, subtitle: String, id : Int) {
@@ -29,7 +28,6 @@ class MuralAnnotation: NSObject, MKAnnotation {
         self.subtitle = subtitle
         self.imageUrl = "http://ville.montreal.qc.ca/murales/detail/\(id)"
     }
-    
     
     // MARK: - Methods
     
@@ -45,5 +43,4 @@ class MuralAnnotation: NSObject, MKAnnotation {
         }
         return muralAnnotationList
     }
-    
 }

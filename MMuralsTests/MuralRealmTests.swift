@@ -12,20 +12,21 @@ import RealmSwift
 
 class MuralRealmTests: XCTestCase {
 
+    // MARK: - Properties
+    
     var realmTest: Realm!
     let configuration = Realm.Configuration( inMemoryIdentifier: "test", schemaVersion: 1 )
+    
+    // MARK: - SETUP
     
     override func setUp() {
         super.setUp()
         realmTest = try! Realm()
         guard realmTest.isEmpty else { return }
-       
-        
     }
 
-    
-    
     //MARK: - Helper Methods
+    
     private func insertMurals() {
         
         let muralsService = MuralsService(muralSession: URLSessionFake(data: FakeMuralsResponseData.responseCorrectData, response: FakeMuralsResponseData.responseOk, error: nil))
@@ -35,6 +36,8 @@ class MuralRealmTests: XCTestCase {
             MuralRealm.addMurals(mural: data, realm: self.realmTest)
         }
      }
+    
+    // MARK: - Test Methods
     
     func testGetMuralsShouldAddDataToBDRealm() {
         insertMurals()

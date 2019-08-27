@@ -19,24 +19,20 @@ class CompassViewController: UIViewController {
     
     // MARK: - Properties
     
-//    internal let locationManager = CLLocationManager()
     let locationServ = LocationService.shared
     let regionRadius: CLLocationDistance = 3000.0
-    var muralAnnotationList : [MuralAnnotation] = [] // create a list of MuralAnnotation
+    var muralAnnotationList : [MuralAnnotation] = []
     let distanceLocation = DistanceLocation()
     
     // MARK: - viewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         compassMapView.showsUserLocation = true
         locationServ.delegate = self
         locationServ.locationManager?.startUpdatingHeading()
         centerLocation()
         addMuralsAnnotation()
-        
-        
     }
     
     // MARK: - IBAction
@@ -106,7 +102,7 @@ class CompassViewController: UIViewController {
     }
     
     
-    /// Create Annotation from [MuralAnnotation) and Add it to MapView
+    /// Create Annotation from [MuralAnnotation) and Add it to compassMapView
     private func addMuralsAnnotation(){
         muralAnnotationList = MuralAnnotation.getMuralAnnotationsList()
         compassMapView.addAnnotations(self.muralAnnotationList)
@@ -115,23 +111,20 @@ class CompassViewController: UIViewController {
     }
 }
 
+// MARK: - LocationServiceDelegate Extension 
+
 extension CompassViewController: LocationServiceDelegate {
     
     func onLocationHeadingUpdate(newHeading: CLHeading) {
         //  let angle = newHeading.trueHeading * .pi / 180
-        // Annimation to turn map when we turn devise
-        print("heading:  \(newHeading)")
+        // Animation to turn map when we turn devise
         UIView.animate(withDuration: 0.5) {
             self.compassMapView.camera.heading = newHeading.magneticHeading
         }
         addMuralsNumberAndTimeVisit()
     }
     
-    
-    func onLocationUpdate(location: CLLocation) {
-        print("Current Location : \(location)")
-        
-    }
+    func onLocationUpdate(location: CLLocation) {}
     
     func onLocationDidFailWithError(error: Error) {
         print("Error while trying to update device location : \(error)")
@@ -139,7 +132,6 @@ extension CompassViewController: LocationServiceDelegate {
     
     /// Call when MapView Orientation change , get figures, calculate and change label NumberMuralLabel and NtimeVisitLabel
     private func addMuralsNumberAndTimeVisit(){
-        
         let pointsSorted = muralsVisitList()
         if pointsSorted.count > 1{
             let distance =  distanceLocation.calculateDistanceBetweenTwoMurals(murals: pointsSorted)

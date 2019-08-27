@@ -24,8 +24,10 @@
 		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
 		1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */; };
 		1437B91522DE37710073A8D2 /* MuralsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */; };
-		1467CB2B230AFD5500AA8D8C /* LocalisationMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467CB2A230AFD5500AA8D8C /* LocalisationMapView.swift */; };
 		1467CB36230B577500AA8D8C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1467CB35230B577500AA8D8C /* LocationService.swift */; };
+		14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855EF231486B5008CF5B7 /* LocationManager.swift */; };
+		14A855F423148715008CF5B7 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F323148715008CF5B7 /* MockLocationManager.swift */; };
+		14A855F6231487DE008CF5B7 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */; };
 		14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */; };
 		14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D646F62307423900E5F4D9 /* CompassViewController.swift */; };
 		14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56B22F344860006A793 /* MuralAnnotationView.swift */; };
@@ -69,8 +71,10 @@
 		1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = MontrealPublicMurals.json; sourceTree = "<group>"; };
 		1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeMuralsResponseData.swift; sourceTree = "<group>"; };
 		1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsServiceTests.swift; sourceTree = "<group>"; };
-		1467CB2A230AFD5500AA8D8C /* LocalisationMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalisationMapView.swift; sourceTree = "<group>"; };
 		1467CB35230B577500AA8D8C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		14A855EF231486B5008CF5B7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		14A855F323148715008CF5B7 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
+		14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealmTests.swift; sourceTree = "<group>"; };
 		14D646F62307423900E5F4D9 /* CompassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassViewController.swift; sourceTree = "<group>"; };
 		14DCB56B22F344860006A793 /* MuralAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationView.swift; sourceTree = "<group>"; };
@@ -127,12 +131,12 @@
 		140D44B322D9390B0057F434 /* MMurals */ = {
 			isa = PBXGroup;
 			children = (
-				140D44CA22D93E2A0057F434 /* Ressources */,
 				140D44C722D93DD60057F434 /* Models */,
 				140D44C622D93DC00057F434 /* Controllers */,
 				140D44C922D93E050057F434 /* Views */,
-				140D44C022D9390C0057F434 /* Info.plist */,
+				140D44CA22D93E2A0057F434 /* Ressources */,
 				140D44B422D9390B0057F434 /* AppDelegate.swift */,
+				140D44C022D9390C0057F434 /* Info.plist */,
 			);
 			path = MMurals;
 			sourceTree = "<group>";
@@ -143,7 +147,6 @@
 				14F75BD022F231D10034D6F1 /* MapViewController.swift */,
 				14D646F62307423900E5F4D9 /* CompassViewController.swift */,
 				142FAAAB22F8D7330073A785 /* RoutingViewController.swift */,
-				1467CB2C230AFFDB00AA8D8C /* LocalisationExtension */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -151,11 +154,10 @@
 		140D44C722D93DD60057F434 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				14B73DCD2314DE2100FD7CC5 /* Location */,
 				1437B8FF22DE34330073A8D2 /* Networking */,
 				1411AE1622DF79C400FD9537 /* MuralRealm.swift */,
 				14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */,
-				14069E2022FB6E80009A413F /* DistanceLocation.swift */,
-				1467CB35230B577500AA8D8C /* LocationService.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,24 +195,44 @@
 		1437B90522DE355E0073A8D2 /* MMuralsTests */ = {
 			isa = PBXGroup;
 			children = (
-				141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */,
-				1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */,
+				14B73DCB2314DD8F00FD7CC5 /* NetworkingTest */,
+				14B73DCC2314DDCD00FD7CC5 /* LocationTest */,
 				14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */,
 				141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */,
-				1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */,
-				1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */,
-				1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */,
 				1437B90822DE355E0073A8D2 /* Info.plist */,
 			);
 			path = MMuralsTests;
 			sourceTree = "<group>";
 		};
-		1467CB2C230AFFDB00AA8D8C /* LocalisationExtension */ = {
+		14B73DCB2314DD8F00FD7CC5 /* NetworkingTest */ = {
 			isa = PBXGroup;
 			children = (
-				1467CB2A230AFD5500AA8D8C /* LocalisationMapView.swift */,
+				1437B91422DE37710073A8D2 /* MuralsServiceTests.swift */,
+				1437B91222DE36EF0073A8D2 /* FakeMuralsResponseData.swift */,
+				1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */,
+				1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */,
 			);
-			path = LocalisationExtension;
+			path = NetworkingTest;
+			sourceTree = "<group>";
+		};
+		14B73DCC2314DDCD00FD7CC5 /* LocationTest */ = {
+			isa = PBXGroup;
+			children = (
+				141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */,
+				14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */,
+				14A855F323148715008CF5B7 /* MockLocationManager.swift */,
+			);
+			path = LocationTest;
+			sourceTree = "<group>";
+		};
+		14B73DCD2314DE2100FD7CC5 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				14069E2022FB6E80009A413F /* DistanceLocation.swift */,
+				1467CB35230B577500AA8D8C /* LocationService.swift */,
+				14A855EF231486B5008CF5B7 /* LocationManager.swift */,
+			);
+			path = Location;
 			sourceTree = "<group>";
 		};
 		5241C526569D43AC18153ECD /* Frameworks */ = {
@@ -458,9 +480,9 @@
 			files = (
 				14DCB56E22F348900006A793 /* ClusterView.swift in Sources */,
 				14069E2122FB6E80009A413F /* DistanceLocation.swift in Sources */,
+				14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */,
 				140D44D222D9426F0057F434 /* MuralsService.swift in Sources */,
 				14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */,
-				1467CB2B230AFD5500AA8D8C /* LocalisationMapView.swift in Sources */,
 				140D44D022D940830057F434 /* ApiKeys.swift in Sources */,
 				142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */,
 				140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */,
@@ -479,6 +501,8 @@
 			files = (
 				1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */,
 				14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */,
+				14A855F6231487DE008CF5B7 /* LocationServiceTests.swift in Sources */,
+				14A855F423148715008CF5B7 /* MockLocationManager.swift in Sources */,
 				1437B91322DE36EF0073A8D2 /* FakeMuralsResponseData.swift in Sources */,
 				141CB1C0230C88FF00C6A970 /* DistanceLocationTests.swift in Sources */,
 				141CB1BE230C821000C6A970 /* MuralAnnotationTests.swift in Sources */,
