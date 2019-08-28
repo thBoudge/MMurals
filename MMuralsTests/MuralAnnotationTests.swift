@@ -26,7 +26,7 @@ class MuralAnnotationTests: XCTestCase {
         realmTest = try! Realm()
         guard realmTest.isEmpty else { return }
     }
-    //MARK: - Helper Methods
+    // MARK: - Helper Methods
     
     private func insertMurals() {
         

@@ -7,7 +7,6 @@
 //
 
 import MapKit
-import RealmSwift
 
 class MapViewController: UIViewController {
 

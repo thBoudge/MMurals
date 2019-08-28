@@ -12,13 +12,13 @@ import RealmSwift
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-    // MARK : PROPERTIES
+    // MARK: - PROPERTIES
     
     var window: UIWindow?
     private let muralsService = MuralsService()
     var authorisationDelegate : AlertSelectionDelegate?
     
-    // MARK : AppDelegate Methods
+    // MARK: - AppDelegate Methods
     
     func application(_ application: UIApplication, willFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
       
@@ -35,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             loadMurals()
         }
         
-        //Locate realm File
+        // Locate realm File
         print(Realm.Configuration.defaultConfiguration.fileURL ?? "yep")
         
         return true
@@ -45,7 +45,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // MARK : Methods
+    // MARK: - Methods
     
     private func loadMurals(){
             self.muralsService.getMurals { (success, response) in

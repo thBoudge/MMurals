@@ -9,7 +9,6 @@
 
 import MapKit
 
-
 class RoutingViewController: UIViewController {
     
     // MARK: - Outlets
@@ -17,6 +16,7 @@ class RoutingViewController: UIViewController {
     @IBOutlet weak var routingMapView: MKMapView!
 
     // MARK: - Properties
+    
     let locationServ = LocationService.shared
     var pointArray : [MuralAnnotation]?
     let regionRadius: CLLocationDistance = 1000.0

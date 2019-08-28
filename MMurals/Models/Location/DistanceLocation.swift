@@ -13,9 +13,8 @@ class DistanceLocation {
     
     // MARK: - Methods
 
-    /// sort [MuralAnnotation] by distance : MuralAnnotation[0] from others MuralAnnotation, and MuralAnnotation nearest slected with others MuralAnnotation ... until no more MuralAnnotation have been selected.
+    /// sort [MuralAnnotation] by distance : MuralAnnotation[0] from others MuralAnnotation, and select nearest MuralAnnotation from all remain MuralAnnotation ... until no more MuralAnnotation have been selected.
     func locationsSortedByDistanceFromPreviousLocation(locations: [MuralAnnotation]) -> [MuralAnnotation] {
-        // take in an array and a starting location
         let startLocation = locations[0]
         var sortedPoint : [MuralAnnotation] = []
         sortedPoint.append(startLocation)
@@ -27,7 +26,6 @@ class DistanceLocation {
             i += 1
         } while i < locations.count - 1
         return sortedPoint
-        
     }
     
 

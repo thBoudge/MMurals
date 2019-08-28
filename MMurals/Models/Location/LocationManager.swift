@@ -32,6 +32,7 @@ protocol LocationManager {
 }
 
 // MARK: - Extension CLLocationManager
+
 // Extension CLLocationManager with LocotionManager Protocola
 extension CLLocationManager: LocationManager {
     

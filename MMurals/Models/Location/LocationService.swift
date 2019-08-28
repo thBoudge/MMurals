@@ -12,12 +12,12 @@ import CoreLocation
 
 // MARK: - Protocols
 
-//// Protocol for all alert MMurals Application
+/// Protocol for all alert MMurals Application
 protocol AlertSelectionDelegate {
     func alertOn (name: String, description: String)
 }
 
-//// Protocol to update location + Heading + Error
+/// Protocol to update location + Heading + Error
 protocol LocationServiceDelegate {
     /// Method that return present user Location CLLocation
     func onLocationUpdate(location: CLLocation)

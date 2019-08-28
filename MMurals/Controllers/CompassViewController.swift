@@ -8,7 +8,6 @@
 
 import MapKit
 
-
 class CompassViewController: UIViewController {
     
     // MARK: - Outlets
