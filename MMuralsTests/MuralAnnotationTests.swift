@@ -1,19 +1,21 @@
 //
-//  MuralRealmTests.swift
+//  MuralAnnotationTests.swift
 //  MMuralsTests
 //
-//  Created by Thomas Bouges on 2019-07-23.
+//  Created by Thomas Bouges on 2019-08-20.
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
 import XCTest
-@testable import MMurals
+import CoreLocation
 import RealmSwift
+@testable import MMurals
 
-class MuralRealmTests: XCTestCase {
+class MuralAnnotationTests: XCTestCase {
 
     // MARK: - Properties
-    
+
+    var muralAnnotationsList : [MuralAnnotation] = []
     var realmTest: Realm!
     let configuration = Realm.Configuration( inMemoryIdentifier: "test", schemaVersion: 1 )
     
@@ -24,34 +26,30 @@ class MuralRealmTests: XCTestCase {
         realmTest = try! Realm()
         guard realmTest.isEmpty else { return }
     }
-
     //MARK: - Helper Methods
     
     private func insertMurals() {
         
         let muralsService = MuralsService(muralSession: URLSessionFake(data: FakeMuralsResponseData.responseCorrectData, response: FakeMuralsResponseData.responseOk, error: nil))
-
+        
         muralsService.getMurals  { (success, response) in
             guard let data = response else {return}
             MuralRealm.addMurals(mural: data, realm: self.realmTest)
         }
-     }
+    }
     
     // MARK: - Test Methods
     
-    func testGetMuralsShouldAddDataToBDRealm() {
+    func testGetMuralsAnnotationsFromRealmAndReturnListAnnotations() {
         insertMurals()
         let expectation = XCTestExpectation(description: "wait for queue")
-        let mural = MuralRealm.all(in: realmTest)
-        let artist = mural[1].artist
+        muralAnnotationsList = MuralAnnotation.getMuralAnnotationsList()
+        let title = muralAnnotationsList[1].title
         expectation.fulfill()
         
-        XCTAssertEqual("Simon Bachand et Jasmin Guérard-Alie", artist)
+        XCTAssertEqual("Simon Bachand et Jasmin Guérard-Alie", title)
         wait(for: [expectation], timeout: 1)
-       
+        
     }
-    
-    
+
 }
-
-

@@ -1,24 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Map View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" rotateEnabled="NO" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M0q-Qo-m4i">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="OXA-iE-lRC">
+                                <rect key="frame" x="89.5" y="520" width="141" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Satelite"/>
+                                </segments>
+                                <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeMapType:" destination="BYZ-38-t0r" eventType="valueChanged" id="3S8-OU-xxp"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PJM-XH-HHs">
+                                <rect key="frame" x="230" y="438" width="70" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="70" id="dQs-ys-vxA"/>
+                                    <constraint firstAttribute="height" constant="70" id="zjh-V5-jCP"/>
+                                </constraints>
+                                <state key="normal" image="ButtonsMuralsGO">
+                                    <color key="titleColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <action selector="getDirectionMap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AYI-uF-kTs"/>
+                                    <segue destination="QOj-n7-d0p" kind="show" identifier="CompassPageSegue" id="phO-Ca-qVn"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="M0q-Qo-m4i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Od4-Zz-mJW"/>
+                            <constraint firstItem="M0q-Qo-m4i" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="PLa-Yz-3gU"/>
+                            <constraint firstItem="M0q-Qo-m4i" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="Po0-ct-fRc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PJM-XH-HHs" secondAttribute="trailing" constant="20" id="cFG-AP-j94"/>
+                            <constraint firstItem="M0q-Qo-m4i" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="gcF-3F-lie"/>
+                            <constraint firstItem="OXA-iE-lRC" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="rGN-5m-Qo6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="OXA-iE-lRC" secondAttribute="bottom" constant="20" id="veE-yd-VfI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PJM-XH-HHs" secondAttribute="bottom" constant="60" id="zUH-8d-Uvy"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="tt6-71-cfY"/>
+                    <connections>
+                        <outlet property="mapView" destination="M0q-Qo-m4i" id="j1f-0f-O71"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="1042.0289855072465" y="98.641304347826093"/>
+        </scene>
+        <!--Compass View Controller-->
+        <scene sceneID="eCs-mV-RIu">
+            <objects>
+                <viewController id="QOj-n7-d0p" customClass="CompassViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="CrH-jx-1SP">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <outlet property="delegate" destination="QOj-n7-d0p" id="FWT-9F-Qqq"/>
+                                </connections>
+                            </mapView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NumberMurals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-4H-h2q">
+                                <rect key="frame" x="66.5" y="55" width="187" height="29.5"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
+                                <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeVisit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7a-HP-MJn">
+                                <rect key="frame" x="100" y="104.5" width="120" height="30"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
+                                <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7P-tS-Ttc">
+                                <rect key="frame" x="20" y="40" width="36" height="36"/>
+                                <state key="normal" image="MiniButtonsMuralsClose">
+                                    <color key="titleColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="closeCompassPage:" destination="QOj-n7-d0p" eventType="touchUpInside" id="6RB-qr-g1l"/>
+                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ReturnToMainPageSegue" id="rL5-Ih-ppr"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ics-OW-Xb9">
+                                <rect key="frame" x="75" y="199" width="170" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="170" id="Mpp-kf-sV7"/>
+                                    <constraint firstAttribute="width" priority="250" constant="170" id="qB7-wM-ckh"/>
+                                    <constraint firstAttribute="width" secondItem="ics-OW-Xb9" secondAttribute="height" multiplier="1:1" id="xH6-GP-eoJ"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="compass"/>
+                                <connections>
+                                    <action selector="goToRouteDirection:" destination="QOj-n7-d0p" eventType="touchUpInside" id="kQ6-iE-bPh"/>
+                                    <segue destination="DBl-v3-5AJ" kind="show" identifier="RoutingViewSegue" id="xck-kd-JHd"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="u7P-tS-Ttc" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" constant="20" id="2Ly-sf-fBh"/>
+                            <constraint firstItem="C4x-cz-Upd" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" id="ErY-BO-moX"/>
+                            <constraint firstItem="s7a-HP-MJn" firstAttribute="top" secondItem="o8D-4H-h2q" secondAttribute="bottom" constant="20" id="GMc-kd-6eh"/>
+                            <constraint firstItem="4lm-q0-G1Q" firstAttribute="trailing" secondItem="C4x-cz-Upd" secondAttribute="trailing" id="OhC-7i-q3d"/>
+                            <constraint firstItem="s7a-HP-MJn" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="VVi-1s-R9o"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerY" secondItem="CrH-jx-1SP" secondAttribute="centerY" id="Vtg-hB-iCs"/>
+                            <constraint firstItem="o8D-4H-h2q" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="ZCV-Kg-7Pt"/>
+                            <constraint firstItem="o8D-4H-h2q" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="35" id="eU2-Nn-FAs"/>
+                            <constraint firstItem="4lm-q0-G1Q" firstAttribute="bottom" secondItem="C4x-cz-Upd" secondAttribute="bottom" id="exX-gk-JWf"/>
+                            <constraint firstItem="ics-OW-Xb9" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="gKp-lq-9gl"/>
+                            <constraint firstItem="C4x-cz-Upd" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="-20" id="kVY-aR-lbV"/>
+                            <constraint firstItem="u7P-tS-Ttc" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="20" id="nyV-CU-I4i"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="4lm-q0-G1Q"/>
+                    </view>
+                    <connections>
+                        <outlet property="compassMapView" destination="C4x-cz-Upd" id="gYL-Uy-upZ"/>
+                        <outlet property="numberMuralLabel" destination="o8D-4H-h2q" id="pCN-ws-llK"/>
+                        <outlet property="timeVisitLabel" destination="s7a-HP-MJn" id="c8o-65-CC1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LVn-Zk-ncU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1991.25" y="98.239436619718305"/>
+        </scene>
+        <!--Routing View Controller-->
+        <scene sceneID="9RP-K6-3Vw">
+            <objects>
+                <viewController id="DBl-v3-5AJ" customClass="RoutingViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="EPN-Uw-zGf">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <connections>
+                                    <outlet property="delegate" destination="DBl-v3-5AJ" id="YYA-ok-gFF"/>
+                                </connections>
+                            </mapView>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ZaC-Ne-762">
+                                <rect key="frame" x="54" y="520" width="212" height="29"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <segments>
+                                    <segment title="Standard"/>
+                                    <segment title="Satelite"/>
+                                    <segment title="FlyOver"/>
+                                </segments>
+                                <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="changeMapType:" destination="DBl-v3-5AJ" eventType="valueChanged" id="B47-B9-joP"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62L-FV-S4w">
+                                <rect key="frame" x="20" y="40" width="36" height="36"/>
+                                <state key="normal" image="MiniButtonsMuralsClose"/>
+                                <connections>
+                                    <action selector="closeRoutingPage:" destination="DBl-v3-5AJ" eventType="touchUpInside" id="LHV-4R-max"/>
+                                    <segue destination="QOj-n7-d0p" kind="show" identifier="ReturnToCompassViewSegue" id="Ruj-6O-G9j"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="neF-Az-lgV" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="-20" id="5G2-Xc-Kw5"/>
+                            <constraint firstItem="neF-Az-lgV" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" id="A8x-Nd-kSf"/>
+                            <constraint firstItem="62L-FV-S4w" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" constant="20" id="PQr-uE-gH6"/>
+                            <constraint firstItem="62L-FV-S4w" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="20" id="URh-Yy-sYa"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="ZaC-Ne-762" secondAttribute="bottom" constant="20" id="Y8a-ey-C9i"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="trailing" secondItem="neF-Az-lgV" secondAttribute="trailing" id="jfB-MV-CEY"/>
+                            <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="neF-Az-lgV" secondAttribute="bottom" id="omw-O1-abE"/>
+                            <constraint firstItem="ZaC-Ne-762" firstAttribute="centerX" secondItem="EPN-Uw-zGf" secondAttribute="centerX" id="tAw-eM-4fC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="gii-Wx-WJg"/>
+                    </view>
+                    <connections>
+                        <outlet property="routingMapView" destination="neF-Az-lgV" id="S2i-xY-Noq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="avF-nV-qj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2972" y="99"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="ButtonsMuralsGO" width="512" height="512"/>
+        <image name="MiniButtonsMuralsClose" width="36" height="36"/>
+        <image name="compass" width="300" height="300"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="phO-Ca-qVn"/>
+    </inferredMetricsTieBreakers>
 </document>
