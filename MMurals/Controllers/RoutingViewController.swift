@@ -5,13 +5,14 @@
 //  Created by Thomas Bouges on 2019-08-05.
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
+// helpSource: https://www.youtube.com/watch?v=vUvf_dlr6IU
 
 import MapKit
 
 
-final class RoutingViewController: UIViewController {
+class RoutingViewController: UIViewController {
     
-    // MARK: - Oulets
+    // MARK: - Outlets
     
     @IBOutlet weak var routingMapView: MKMapView!
 
@@ -24,30 +25,17 @@ final class RoutingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         routingMapView.showsUserLocation = true
-        locationServ.delegate = self
-        
-        let locationUser = locationServ.currentLocation.coordinate
-        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-        
-        routingMapView.setRegion(region, animated: true)
-        
-        
+        setMapViewSize()
         guard let points = pointArray else {return}
-        // https://www.youtube.com/watch?v=vUvf_dlr6IU
         getDirections(sortedLocations: points)
-
-        guard let muralAnnotationList = pointArray else {return}
-        routingMapView.addAnnotations(muralAnnotationList)
-        routingMapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
-        routingMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+        addMuralsAnnotation()
         routingMapView.delegate = self
     }
     
     // MARK: - IBACTION
     
-    // change Map type fom Standard to satellite to FlyOver
+    // Change Map type fom Standard to satellite to FlyOver
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
         if sender.selectedSegmentIndex == 0 {
             routingMapView.mapType = .standard
@@ -55,7 +43,7 @@ final class RoutingViewController: UIViewController {
             routingMapView.mapType = .satellite
         } else if sender.selectedSegmentIndex == 2{
             routingMapView.mapType = .satelliteFlyover
-            guard let coordinate = pointArray?.first?.coordinate else {return}
+            guard let coordinate = locationServ.currentLocation?.coordinate else {return}
             let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: 300, pitch: 40, heading: 0)
             routingMapView.camera = camera
         }
@@ -66,35 +54,33 @@ final class RoutingViewController: UIViewController {
         self.performSegue(withIdentifier: "ReturnToCompassViewSegue", sender: self)
     }
     
-    // MARK: prepare for Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //arréter localisation
-    }
     // MARK: - Methods
     
+    /// Create a region size from user localisation yhay define RoutingViewMap
+    private func setMapViewSize(){
+        guard let locationUser = locationServ.currentLocation?.coordinate else {return}
+        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        routingMapView.setRegion(region, animated: true)
+    }
     
-    
-    /// create a route polyline between each Mural to visit and show it on MapView
+    /// Create a route polyline between each Mural to visit and show it on MapView
     private func getDirections(sortedLocations : [MuralAnnotation]){
-        
-        for i in 0 ..< sortedLocations.count - 1 {
-            var muralsDirection : [CLLocationCoordinate2D] = []
-            muralsDirection.append(sortedLocations[i].coordinate)
-            muralsDirection.append(sortedLocations[i + 1].coordinate)
-            
-            let request = createDirectionRequest(coordinates: muralsDirection)
-            let directions = MKDirections(request: request)
-            directions.calculate { (response, error) in
-                guard let response = response else {return}
+        if sortedLocations.count >= 1 {
+            for i in 0 ..< sortedLocations.count - 1 {
+                var muralsDirection : [CLLocationCoordinate2D] = []
+                muralsDirection.append(sortedLocations[i].coordinate)
+                muralsDirection.append(sortedLocations[i + 1].coordinate)
                 
-                for route in response.routes {
-                    self.routingMapView.addOverlay(route.polyline)
-                    //show all the map surronding the direction
-//                self.routingMapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                let request = createDirectionRequest(coordinates: muralsDirection)
+                let directions = MKDirections(request: request)
+                directions.calculate { (response, error) in
+                    guard let response = response else {return}
+                    
+                    for route in response.routes {
+                        self.routingMapView.addOverlay(route.polyline)
+                    }
                 }
             }
-            
         }
     }
 
@@ -103,7 +89,6 @@ final class RoutingViewController: UIViewController {
 
         let destinationCoordinates = MKPlacemark(coordinate: coordinates[1])
         let startCoordinates = MKPlacemark(coordinate: coordinates[0])
-
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: startCoordinates)
         request.destination = MKMapItem(placemark: destinationCoordinates)
@@ -111,6 +96,15 @@ final class RoutingViewController: UIViewController {
 
         return request
     }
+    
+    /// Create Annotation from [MuralAnnotation) and Add it to compassMapView
+    private func addMuralsAnnotation(){
+        guard let muralAnnotationList = pointArray else {return}
+        routingMapView.addAnnotations(muralAnnotationList)
+        routingMapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        routingMapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+    }
+    
 }
 
 // MARK: - Extension MKMapViewDelegate
@@ -121,7 +115,6 @@ extension RoutingViewController: MKMapViewDelegate {
     
     // Create a renderer
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        
         let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
         renderer.strokeColor = .purple
         renderer.lineWidth = 5
@@ -130,25 +123,8 @@ extension RoutingViewController: MKMapViewDelegate {
     
     // Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        MuralAnnotation.didSelectAnnotation(view: view, pointArray: pointArray)
+        MuralAnnotationView.didSelectAnnotation(view: view, pointArray: pointArray)
     }
     
 }
 
-extension RoutingViewController: LocationServiceDelegate {
-   
-    func onLocationHeadingUpdate(newHeading: CLHeading) {
-        
-    }
-    
-    
-    func onLocationUpdate(location: CLLocation) {
-        print("Current Location : \(location)")
-        
-        
-    }
-    
-    func onLocationDidFailWithError(error: Error) {
-        print("Error while trying to update device location : \(error)")
-    }
-}

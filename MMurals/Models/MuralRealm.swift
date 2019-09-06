@@ -22,15 +22,19 @@ class MuralRealm: Object {
     @objc dynamic var longitude = 0.0
     @objc dynamic var latitude = 0.0
     
+    // MARK: - Static Method AllObjects
     
+    /// Fetches all MuralRealm items from your default Realm file.
+    static func all(in realm: Realm = try! Realm()) -> Results<MuralRealm> {
+        return realm.objects(MuralRealm.self)
+    }
     
     // MARK: - Methods
     
     static func addMurals(mural: Mural, realm : Realm = try! Realm()){
-
         guard let muralsData = mural.features else {return}
-    
         for muralData in muralsData {
+            
             let muralToAdd = MuralRealm()
             
             guard let id = muralData.properties?.id else {return}
@@ -49,17 +53,11 @@ class MuralRealm: Object {
             muralToAdd.latitude = latitude
             muralToAdd.longitude = longitude
             
-            
-            
             try! realm.write {
                 realm.add(muralToAdd)
-               
             }
         }
     }
-    
-    
-    
 }
 
 

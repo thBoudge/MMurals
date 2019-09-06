@@ -7,38 +7,46 @@
 //
 
 import MapKit
+import RealmSwift
 
-final class MapViewController: UIViewController {
+class MapViewController: UIViewController {
 
-    // MARK: - Oulets
+    // MARK: - Outlets
     
     @IBOutlet weak var mapView: MKMapView!
     
     // MARK: - Properties
-    
-//    let locationManager = CLLocationManager()
+
     let locationServ = LocationService.shared
     let regionRadius: CLLocationDistance = 5000.0
     // create a list of MuralAnnotation
     var muralAnnotationList : [MuralAnnotation] = []
+    // Alert Load data
+    let appDelegate = AppDelegate()
     
     // MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         mapView.delegate = self
         mapView.showsUserLocation = true
         locationServ.delegate = self
-        
-        addAnnotation()
+        locationServ.authorisationDelegate = self
+        appDelegate.authorisationDelegate = self
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.addAnnotation()
+        }
     }
     
-
+    // MARK: - ViewDidAppear
+    
+    override func viewDidAppear(_ animated: Bool) {
+        locationServ.locationManager?.startUpdatingLocation()
+    }
     
     // MARK: - IBACTION
     
-    // change Map type fom Standard to satellite
+    // Change Map type fom Standard to satellite
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
         
         if sender.selectedSegmentIndex == 0 {
@@ -48,67 +56,58 @@ final class MapViewController: UIViewController {
         }
     }
     
-    
+    // open page CompassViewController
     @IBAction func getDirectionMap(_ sender: UIButton) {
-        
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
     }
     
-    // MARK: prepare for Segue
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        locationServ.locationManager.stopUpdatingLocation()
-//        locationManager.stopUpdatingLocation()
-    }
     // MARK: - Methods
     
     /// Create Annotation from [MuralAnnotation) and Add it to MapView
     private func addAnnotation(){
-        
         muralAnnotationList = MuralAnnotation.getMuralAnnotationsList()
         mapView.addAnnotations(self.muralAnnotationList)
         mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
-        
     }
-    
-    /// Create a Region that will be show on MapView
-    private func centerLocation(){
-        let locationUser = locationServ.currentLocation.coordinate
-        let region = MKCoordinateRegion(center: locationUser, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
-            
-        mapView.setRegion(region, animated: true)
-        
-    }
-    
 }
 
-// MARK: - MKMaViewDelegate extension
+// MARK: - MKMapViewDelegate extension
 
 extension MapViewController: MKMapViewDelegate{
     
     // Methods that Make appear internet site after a tap on annotation
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        
-        MuralAnnotation.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
-        
+        MuralAnnotationView.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
     }
 }
 
+// MARK: - LocationServiceDelegate Extension 
+
 extension MapViewController: LocationServiceDelegate {
     
-    func onLocationHeadingUpdate(newHeading: CLHeading) {
-        
-    }
+    func onLocationHeadingUpdate(newHeading: CLHeading) {}
     
     
     func onLocationUpdate(location: CLLocation) {
-        print("Current Location : \(location)")
-        centerLocation()
+        // Create a Region that will be show on MapView only when PageOpen and stop Update Location
+        let region = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: regionRadius, longitudinalMeters: regionRadius)
+        mapView.setRegion(region, animated: false)
+        locationServ.locationManager?.stopUpdatingLocation()
         
     }
     
     func onLocationDidFailWithError(error: Error) {
         print("Error while trying to update device location : \(error)")
+    }
+}
+
+// MARK: - alertOn locatlisation Permission issue
+
+extension MapViewController : AlertSelectionDelegate {
+    func alertOn(name: String, description: String) {
+        let alertMVC = UIAlertController(title: name, message: description, preferredStyle: .alert)
+        alertMVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertMVC, animated: true, completion: nil)
     }
 }
