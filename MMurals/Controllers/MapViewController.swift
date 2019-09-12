@@ -59,10 +59,7 @@ class MapViewController: UIViewController {
     
     // open page CompassViewController
     @IBAction func getDirectionMap(_ sender: UIButton) {
-//        self.dismiss(animated: true)
-        self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
-    
-        
+        self.dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Methods

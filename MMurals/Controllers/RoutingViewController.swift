@@ -53,12 +53,6 @@ class RoutingViewController: UIViewController {
         
     }
     
-    // Close viewPage
-    @IBAction func closeRoutingPage(_ sender: UIButton) {
-//        self.dismiss(animated: true)
-        self.performSegue(withIdentifier: "ReturnToCompassViewSegue", sender: self)
-    }
-    
     // MARK: - Methods
     
     /// Create a region size from user localisation yhay define RoutingViewMap
