@@ -33,7 +33,7 @@ class MuralRealmTests: XCTestCase {
 
         muralsService.getMurals  { (success, response) in
             guard let data = response else {return}
-            MuralRealm.addMurals(mural: data, realm: self.realmTest)
+            MuralPersistentData.addMurals(mural: data, realm: self.realmTest)
         }
      }
     
@@ -42,7 +42,7 @@ class MuralRealmTests: XCTestCase {
     func testGetMuralsShouldAddDataToBDRealm() {
         insertMurals()
         let expectation = XCTestExpectation(description: "wait for queue")
-        let mural = MuralRealm.all(in: realmTest)
+        let mural = MuralPersistentData.all(in: realmTest)
         let artist = mural[1].artist
         expectation.fulfill()
         

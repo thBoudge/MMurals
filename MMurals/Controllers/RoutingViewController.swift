@@ -37,20 +37,25 @@ class RoutingViewController: UIViewController {
     
     // Change Map type fom Standard to satellite to FlyOver
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
-        if sender.selectedSegmentIndex == 0 {
+        
+        switch sender.selectedSegmentIndex {
+        case 0:
             routingMapView.mapType = .standard
-        }else if sender.selectedSegmentIndex == 1{
+        case 1:
             routingMapView.mapType = .satellite
-        } else if sender.selectedSegmentIndex == 2{
+        case 2:
             routingMapView.mapType = .satelliteFlyover
             guard let coordinate = locationServ.currentLocation?.coordinate else {return}
             let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: 300, pitch: 40, heading: 0)
             routingMapView.camera = camera
+        default: break
         }
+        
     }
     
     // Close viewPage
     @IBAction func closeRoutingPage(_ sender: UIButton) {
+//        self.dismiss(animated: true)
         self.performSegue(withIdentifier: "ReturnToCompassViewSegue", sender: self)
     }
     

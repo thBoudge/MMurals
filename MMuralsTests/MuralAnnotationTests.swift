@@ -34,7 +34,7 @@ class MuralAnnotationTests: XCTestCase {
         
         muralsService.getMurals  { (success, response) in
             guard let data = response else {return}
-            MuralRealm.addMurals(mural: data, realm: self.realmTest)
+            MuralPersistentData.addMurals(mural: data, realm: self.realmTest)
         }
     }
     

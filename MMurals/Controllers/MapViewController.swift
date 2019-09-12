@@ -47,17 +47,21 @@ class MapViewController: UIViewController {
     
     // Change Map type fom Standard to satellite
     @IBAction func changeMapType(_ sender: UISegmentedControl) {
-        
-        if sender.selectedSegmentIndex == 0 {
+        switch sender.selectedSegmentIndex {
+        case 0:
             mapView.mapType = .standard
-        }else{
+        case 1:
             mapView.mapType = .satellite
+        default: break
         }
     }
     
     // open page CompassViewController
     @IBAction func getDirectionMap(_ sender: UIButton) {
+//        self.dismiss(animated: true)
         self.performSegue(withIdentifier: "CompassPageSegue", sender: self)
+    
+        
     }
     
     // MARK: - Methods
