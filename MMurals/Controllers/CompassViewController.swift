@@ -37,14 +37,10 @@ class CompassViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func goToRouteDirection(_ sender: UIButton) {
-        self.performSegue(withIdentifier: "RoutingViewSegue", sender: self)
+        self.dismiss(animated: true)
     }
     
-    @IBAction func closeCompassPage(_ sender: UIButton) {
-//        self.dismiss(animated: true)
-        self.performSegue(withIdentifier: "ReturnToMainPageSegue", sender: self)
-        
-    }
+    
     
     // MARK: prepare for Segue
     

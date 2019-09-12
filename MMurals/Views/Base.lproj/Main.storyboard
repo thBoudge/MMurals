@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="S7Q-pO-VcP">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MapViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
@@ -61,16 +61,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="tt6-71-cfY"/>
+                    <navigationItem key="navigationItem" title="Map" largeTitleDisplayMode="never" id="tt6-71-cfY"/>
                     <connections>
                         <outlet property="mapView" destination="M0q-Qo-m4i" id="j1f-0f-O71"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="98.641304347826093"/>
+            <point key="canvasLocation" x="2038.125" y="98.239436619718305"/>
         </scene>
-        <!--Compass View Controller-->
+        <!--Compass-->
         <scene sceneID="eCs-mV-RIu">
             <objects>
                 <viewController id="QOj-n7-d0p" customClass="CompassViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
@@ -79,33 +79,23 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" zoomEnabled="NO" scrollEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4x-cz-Upd">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <connections>
                                     <outlet property="delegate" destination="QOj-n7-d0p" id="FWT-9F-Qqq"/>
                                 </connections>
                             </mapView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NumberMurals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o8D-4H-h2q">
-                                <rect key="frame" x="66.5" y="55" width="187" height="29.5"/>
+                                <rect key="frame" x="66.5" y="99" width="187" height="29.5"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
                                 <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeVisit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s7a-HP-MJn">
-                                <rect key="frame" x="100" y="104.5" width="120" height="30"/>
+                                <rect key="frame" x="100" y="148.5" width="120" height="30"/>
                                 <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
                                 <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7P-tS-Ttc">
-                                <rect key="frame" x="20" y="40" width="36" height="36"/>
-                                <state key="normal" image="MiniButtonsMuralsClose">
-                                    <color key="titleColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="closeCompassPage:" destination="QOj-n7-d0p" eventType="touchUpInside" id="6RB-qr-g1l"/>
-                                    <segue destination="BYZ-38-t0r" kind="show" identifier="ReturnToMainPageSegue" id="rL5-Ih-ppr"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ics-OW-Xb9">
                                 <rect key="frame" x="75" y="199" width="170" height="170"/>
                                 <constraints>
@@ -122,7 +112,6 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="u7P-tS-Ttc" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" constant="20" id="2Ly-sf-fBh"/>
                             <constraint firstItem="C4x-cz-Upd" firstAttribute="leading" secondItem="4lm-q0-G1Q" secondAttribute="leading" id="ErY-BO-moX"/>
                             <constraint firstItem="s7a-HP-MJn" firstAttribute="top" secondItem="o8D-4H-h2q" secondAttribute="bottom" constant="20" id="GMc-kd-6eh"/>
                             <constraint firstItem="4lm-q0-G1Q" firstAttribute="trailing" secondItem="C4x-cz-Upd" secondAttribute="trailing" id="OhC-7i-q3d"/>
@@ -133,10 +122,10 @@
                             <constraint firstItem="4lm-q0-G1Q" firstAttribute="bottom" secondItem="C4x-cz-Upd" secondAttribute="bottom" id="exX-gk-JWf"/>
                             <constraint firstItem="ics-OW-Xb9" firstAttribute="centerX" secondItem="CrH-jx-1SP" secondAttribute="centerX" id="gKp-lq-9gl"/>
                             <constraint firstItem="C4x-cz-Upd" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="-20" id="kVY-aR-lbV"/>
-                            <constraint firstItem="u7P-tS-Ttc" firstAttribute="top" secondItem="4lm-q0-G1Q" secondAttribute="top" constant="20" id="nyV-CU-I4i"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4lm-q0-G1Q"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Compass" largeTitleDisplayMode="never" id="GtU-GL-9OL"/>
                     <connections>
                         <outlet property="compassMapView" destination="C4x-cz-Upd" id="gYL-Uy-upZ"/>
                         <outlet property="numberMuralLabel" destination="o8D-4H-h2q" id="pCN-ws-llK"/>
@@ -145,9 +134,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVn-Zk-ncU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1991.25" y="98.239436619718305"/>
+            <point key="canvasLocation" x="2988.75" y="98.239436619718305"/>
         </scene>
-        <!--Routing View Controller-->
+        <!--Visit-->
         <scene sceneID="9RP-K6-3Vw">
             <objects>
                 <viewController id="DBl-v3-5AJ" customClass="RoutingViewController" customModule="MMurals" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,7 +145,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="neF-Az-lgV">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
                                 <connections>
                                     <outlet property="delegate" destination="DBl-v3-5AJ" id="YYA-ok-gFF"/>
                                 </connections>
@@ -174,22 +163,12 @@
                                     <action selector="changeMapType:" destination="DBl-v3-5AJ" eventType="valueChanged" id="B47-B9-joP"/>
                                 </connections>
                             </segmentedControl>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="62L-FV-S4w">
-                                <rect key="frame" x="20" y="40" width="36" height="36"/>
-                                <state key="normal" image="MiniButtonsMuralsClose"/>
-                                <connections>
-                                    <action selector="closeRoutingPage:" destination="DBl-v3-5AJ" eventType="touchUpInside" id="LHV-4R-max"/>
-                                    <segue destination="QOj-n7-d0p" kind="show" identifier="ReturnToCompassViewSegue" id="Ruj-6O-G9j"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="neF-Az-lgV" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="-20" id="5G2-Xc-Kw5"/>
                             <constraint firstItem="neF-Az-lgV" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" id="A8x-Nd-kSf"/>
-                            <constraint firstItem="62L-FV-S4w" firstAttribute="leading" secondItem="gii-Wx-WJg" secondAttribute="leading" constant="20" id="PQr-uE-gH6"/>
-                            <constraint firstItem="62L-FV-S4w" firstAttribute="top" secondItem="gii-Wx-WJg" secondAttribute="top" constant="20" id="URh-Yy-sYa"/>
                             <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="ZaC-Ne-762" secondAttribute="bottom" constant="20" id="Y8a-ey-C9i"/>
                             <constraint firstItem="gii-Wx-WJg" firstAttribute="trailing" secondItem="neF-Az-lgV" secondAttribute="trailing" id="jfB-MV-CEY"/>
                             <constraint firstItem="gii-Wx-WJg" firstAttribute="bottom" secondItem="neF-Az-lgV" secondAttribute="bottom" id="omw-O1-abE"/>
@@ -197,21 +176,41 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gii-Wx-WJg"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Visit" largeTitleDisplayMode="never" id="u3w-2K-8vq"/>
                     <connections>
                         <outlet property="routingMapView" destination="neF-Az-lgV" id="S2i-xY-Noq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="avF-nV-qj1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2972" y="99"/>
+            <point key="canvasLocation" x="3969.375" y="98.239436619718305"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="IXJ-Ch-lcR">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="S7Q-pO-VcP" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kh6-EQ-zvr">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="0.58823529409999997" green="0.1215686275" blue="0.96470588239999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ygf-wk-gpt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aDD-fu-mhZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1040.625" y="98.239436619718305"/>
         </scene>
     </scenes>
     <resources>
         <image name="ButtonsMuralsGO" width="512" height="512"/>
-        <image name="MiniButtonsMuralsClose" width="36" height="36"/>
         <image name="compass" width="300" height="300"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="Ruj-6O-G9j"/>
-    </inferredMetricsTieBreakers>
 </document>
