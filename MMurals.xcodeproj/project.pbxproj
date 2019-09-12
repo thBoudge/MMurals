@@ -15,7 +15,7 @@
 		140D44CE22D9407B0057F434 /* ApiKeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 140D44CD22D9407B0057F434 /* ApiKeys.plist */; };
 		140D44D022D940830057F434 /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44CF22D940830057F434 /* ApiKeys.swift */; };
 		140D44D222D9426F0057F434 /* MuralsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140D44D122D9426F0057F434 /* MuralsService.swift */; };
-		1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411AE1622DF79C400FD9537 /* MuralRealm.swift */; };
+		1411AE1722DF79C400FD9537 /* MuralPersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411AE1622DF79C400FD9537 /* MuralPersistentData.swift */; };
 		141CB1BE230C821000C6A970 /* MuralAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */; };
 		141CB1C0230C88FF00C6A970 /* DistanceLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */; };
 		142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FAAAB22F8D7330073A785 /* RoutingViewController.swift */; };
@@ -60,7 +60,7 @@
 		140D44CD22D9407B0057F434 /* ApiKeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ApiKeys.plist; sourceTree = "<group>"; };
 		140D44CF22D940830057F434 /* ApiKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		140D44D122D9426F0057F434 /* MuralsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralsService.swift; sourceTree = "<group>"; };
-		1411AE1622DF79C400FD9537 /* MuralRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealm.swift; sourceTree = "<group>"; };
+		1411AE1622DF79C400FD9537 /* MuralPersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralPersistentData.swift; sourceTree = "<group>"; };
 		141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationTests.swift; sourceTree = "<group>"; };
 		141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceLocationTests.swift; sourceTree = "<group>"; };
 		142FAAAB22F8D7330073A785 /* RoutingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +156,7 @@
 			children = (
 				14B73DCD2314DE2100FD7CC5 /* Location */,
 				1437B8FF22DE34330073A8D2 /* Networking */,
-				1411AE1622DF79C400FD9537 /* MuralRealm.swift */,
+				1411AE1622DF79C400FD9537 /* MuralPersistentData.swift */,
 				14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */,
 			);
 			path = Models;
@@ -490,7 +490,7 @@
 				1467CB36230B577500AA8D8C /* LocationService.swift in Sources */,
 				14F75BD322F24A890034D6F1 /* MuralAnnotation.swift in Sources */,
 				1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */,
-				1411AE1722DF79C400FD9537 /* MuralRealm.swift in Sources */,
+				1411AE1722DF79C400FD9537 /* MuralPersistentData.swift in Sources */,
 				14F75BD122F231D10034D6F1 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -661,15 +661,18 @@
 			baseConfigurationReference = 12B315FC2D7961E4499C7684 /* Pods-MMurals.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
 				INFOPLIST_FILE = MMurals/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.MMurals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -680,15 +683,18 @@
 			baseConfigurationReference = 79BD27500672BDF17693901C /* Pods-MMurals.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 7XB8K9T4CZ;
 				INFOPLIST_FILE = MMurals/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = fr.thomasbouges.MMurals;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -42,7 +42,9 @@ class CompassViewController: UIViewController {
     }
     
     @IBAction func closeCompassPage(_ sender: UIButton) {
-         self.performSegue(withIdentifier: "ReturnToMainPageSegue", sender: self)
+//        self.dismiss(animated: true)
+        self.performSegue(withIdentifier: "ReturnToMainPageSegue", sender: self)
+        
     }
     
     // MARK: prepare for Segue

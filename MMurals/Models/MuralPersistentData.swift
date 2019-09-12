@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 
-class MuralRealm: Object {
+class MuralPersistentData: Object {
     
     // MARK: - Persisted Properties
     
@@ -25,8 +25,8 @@ class MuralRealm: Object {
     // MARK: - Static Method AllObjects
     
     /// Fetches all MuralRealm items from your default Realm file.
-    static func all(in realm: Realm = try! Realm()) -> Results<MuralRealm> {
-        return realm.objects(MuralRealm.self)
+    static func all(in realm: Realm = try! Realm()) -> Results<MuralPersistentData> {
+        return realm.objects(MuralPersistentData.self)
     }
     
     // MARK: - Methods
@@ -35,7 +35,7 @@ class MuralRealm: Object {
         guard let muralsData = mural.features else {return}
         for muralData in muralsData {
             
-            let muralToAdd = MuralRealm()
+            let muralToAdd = MuralPersistentData()
             
             guard let id = muralData.properties?.id else {return}
             guard let artist  = muralData.properties?.artiste else {return}

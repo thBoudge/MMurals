@@ -34,7 +34,7 @@ class MuralAnnotation: NSObject, MKAnnotation {
     /// Method that collect data from RealmDataBase and return [MuralAnnotation]
     static func getMuralAnnotationsList() -> [MuralAnnotation] {
         var muralAnnotationList : [MuralAnnotation] = []
-        let muralsList = MuralRealm.all()
+        let muralsList = MuralPersistentData.all()
         
         for mural in muralsList {
             let locatePoint = CLLocation(latitude: mural.latitude, longitude: mural.longitude)

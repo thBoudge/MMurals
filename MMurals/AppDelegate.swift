@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func loadMurals(){
             self.muralsService.getMurals { (success, response) in
                 if success, let data = response  {
-                    MuralRealm.addMurals(mural: data)
+                    MuralPersistentData.addMurals(mural: data)
                 } else {
                     //alert in case of no success or empty data
                     self.authorisationDelegate?.alertOn(name: "Problem to dowLoad Data", description: "We could not dowload data, Please control that you are connected and start again MMurals")
