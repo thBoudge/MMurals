@@ -6,12 +6,12 @@
 //  Copyright © 2019 Thomas Bouges. All rights reserved.
 //
 
-import UIKit
 import MapKit
+import RealmSwift
 
 class MuralViewController: UIViewController {
     
-    //MARK: - OUTLETS
+    // MARK: - OUTLETS
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var menuButton: UIButton!
@@ -19,50 +19,67 @@ class MuralViewController: UIViewController {
     @IBOutlet weak var typeView: UIView!
     @IBOutlet weak var compassDirectionButton: UIButton!
     
-    //MARK: Contraints OUTLETS
+    // Mark: MuralVisit Information Oulets
+    
+    @IBOutlet weak var timeVisitLabel: UILabel!
+    @IBOutlet weak var numberMuralLabel: UILabel!
+    
+    // MARK: Contraints OUTLETS
     
     @IBOutlet weak var compassMenuViewheightContraint: NSLayoutConstraint!
     @IBOutlet weak var typeMenuViewWidhContraint: NSLayoutConstraint!
     
-    //MARK: - Properties
+    // MARK: - Properties
     
-    /// inform if mainMenu is open or close
-    private var menuIsOpen = false
+    let locationServ = LocationService.shared
+    var regionRadius: CLLocationDistance = 3000.0
+    var muralAnnotationList : [MuralAnnotation] = [] // create a list of MuralAnnotation
+    let appDelegate = AppDelegate() // Alert Load data
+    var menuIsOpen = false  // inform if mainMenu is open or close
+    var mapToAppear = 0 // inform which map specificity need to appear
+    let distanceLocation = DistanceLocation()
     
+    // MARK: - ViewDidLoad
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        mapView.delegate = self
+        mapView.showsUserLocation = true
+        locationServ.delegate = self
+        locationServ.authorisationDelegate = self
+        appDelegate.authorisationDelegate = self
     }
     
-    //MARK: ViewWillAppear
+    // MARK: - ViewWillAppear
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         viewAppearanceStart()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.addAnnotation()
+            self.mapImplementation(mapCode: self.mapToAppear)
+        }
     }
     
-    //MARK: ABAction
+    // MARK: - ABAction
     
-    //Methode that animate open and close Menu
     @IBAction func openCloseMenu(_ sender: UIButton) {
-        menuIsOpen = !menuIsOpen
-        compassMenuViewheightContraint.constant = menuIsOpen ? 260 : 0
-        typeMenuViewWidhContraint.constant = menuIsOpen ? 260 : 0
-        animateOpenCloseMenuButton(menuIsOpen: menuIsOpen)
+        showOrHideMenu()
     }
     
     @IBAction func compassOneDirectionOpen(_ sender: UIButton) {
-        animateFadeCompassDirectionButton(toImage: UIImage(named: "compassFinal")!)
+        mapToAppear =  0
+        mapImplementation(mapCode: mapToAppear)
     }
     
     @IBAction func compassAllAroundOpen(_ sender: UIButton) {
-        animateFadeCompassDirectionButton(toImage: UIImage(named: "fromHereCompass")!)
+        mapToAppear =  1
+        mapImplementation(mapCode: mapToAppear)
     }
     
     @IBAction func fullMapOpen(_ sender: UIButton) {
-        compassDirectionButton.alpha = 0
+        mapToAppear =  2
+        mapImplementation(mapCode: mapToAppear)
     }
     
     @IBAction func changeMapType(_ sender: UIButton) {
@@ -74,71 +91,39 @@ class MuralViewController: UIViewController {
         case 2:
             mapView.mapType = .satelliteFlyover
             guard let coordinate = LocationService.shared.currentLocation?.coordinate else {return}
-            let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: 300, pitch: 40, heading: 0)
+            let camera = MKMapCamera(lookingAtCenter: coordinate , fromDistance: regionRadius, pitch: 40, heading: 0)
             mapView.camera = camera
         default: break
         }
+        labelTextColorIs()
     }
-    //MARK: - Methods
     
-    //MARK: View Appearance Method
+    @IBAction func createMuralsVisitRouting(_ sender: UIButton) {
+        
+    }
+    
+    
+    // MARK: - Methods
+    
+    // MARK: View Appearance Method
     
     /// Implement appearance of first page when ViewWillAppear
     private func viewAppearanceStart(){
         typeView.layer.cornerRadius = 25
         compassView.layer.cornerRadius = 25
-        compassDirectionButton.alpha = 1
         compassMenuViewheightContraint.constant =  0
         typeMenuViewWidhContraint.constant = 0
+        timeVisitLabel.backgroundColor = #colorLiteral(red: 1, green: 0.7044478059, blue: 0.9662576318, alpha: 0.3725385274)
     }
     
-    //MARK: Animation Methods
-    
-    /// methods that animate menuButton
-    private func animateOpenCloseMenuButton(menuIsOpen: Bool) {
-        UIView.animate(
-            withDuration: 0.9,
-            delay: 0,
-            usingSpringWithDamping: 0.85,
-            initialSpringVelocity: 10,
-            options: .allowUserInteraction,
-            animations: {
-                // Rotation of menuButton + to X
-                let angle: CGFloat = self.menuIsOpen ? .pi / 4 : 0.0
-                
-                self.menuButton.transform = CGAffineTransform(rotationAngle: angle)
-                self.view.layoutIfNeeded() // we update change
-        },
-            completion: nil
-        )
+    /// Create Annotation from [MuralAnnotation) and Add it to MapView
+    private func addAnnotation(){
+        muralAnnotationList = MuralAnnotation.getMuralAnnotationsList()
+        mapView.addAnnotations(self.muralAnnotationList)
+        mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
+        mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
     }
     
-    /// methods that animate CompassMainButton
-   private func animateFadeCompassDirectionButton(toImage: UIImage) {
-        //Create & set up temp view
-        let temporyView = UIImageView(frame: compassDirectionButton.frame)
-        temporyView.image = toImage
-        temporyView.alpha = 0.0
-        temporyView.center.y += 20
-        temporyView.bounds.size.width = compassDirectionButton.bounds.width * 1.3
-        compassDirectionButton.superview?.insertSubview(temporyView, aboveSubview: compassDirectionButton)
-        
-        UIView.animate(
-            withDuration: 0.5,
-            animations: {
-                //Fade temp view in
-                temporyView.alpha = 1.0
-                temporyView.center.y -= 20
-                temporyView.bounds.size = self.compassDirectionButton.bounds.size
-        },
-            completion: { _ in
-                //Update background view & view temp view
-                self.compassDirectionButton.setImage(toImage, for: .normal)
-                self.compassDirectionButton.alpha = 1
-                temporyView.removeFromSuperview()
-        }
-        )
-    }
-    
-
 }
+
+

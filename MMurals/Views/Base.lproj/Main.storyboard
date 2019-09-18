@@ -196,15 +196,20 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="NTR-xO-WfU">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-7u-cEs" customClass="MainCompassDirectionButton" customModule="MMurals" customModuleProvider="target">
-                                <rect key="frame" x="122" y="283" width="170" height="170"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="e4r-7u-cEs" secondAttribute="height" multiplier="1:1" id="9k2-Kd-FSP"/>
-                                    <constraint firstAttribute="height" constant="170" id="LpT-Ai-YuY"/>
-                                    <constraint firstAttribute="width" priority="250" constant="170" id="zF6-Eo-Xfk"/>
-                                </constraints>
-                                <state key="normal" title="Button" image="compassFinal"/>
-                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NumberMurals" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nPB-w0-fdk">
+                                <rect key="frame" x="113.33333333333333" y="49.999999999999993" width="187.33333333333337" height="29.666666666666664"/>
+                                <color key="backgroundColor" red="1" green="0.7044478059" blue="0.96625763180000002" alpha="0.2587788955479452" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
+                                <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TimeVisit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebp-eu-qjG">
+                                <rect key="frame" x="147" y="99.666666666666671" width="120" height="29.666666666666671"/>
+                                <color key="backgroundColor" red="1" green="0.7044478059" blue="0.96625763180000002" alpha="0.2588324058219178" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" name="AmericanTypewriter-Bold" family="American Typewriter" pointSize="24"/>
+                                <color key="textColor" red="0.25354196540000001" green="0.18493164170000001" blue="0.34533623479999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N9f-11-T93">
                                 <rect key="frame" x="324" y="386" width="70" height="260"/>
                                 <subviews>
@@ -251,6 +256,18 @@
                                     <constraint firstAttribute="height" constant="260" id="r7P-Cc-ftx"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e4r-7u-cEs">
+                                <rect key="frame" x="122" y="283" width="170" height="170"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="e4r-7u-cEs" secondAttribute="height" multiplier="1:1" id="9k2-Kd-FSP"/>
+                                    <constraint firstAttribute="height" constant="170" id="LpT-Ai-YuY"/>
+                                    <constraint firstAttribute="width" priority="250" constant="170" id="zF6-Eo-Xfk"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="compassFinal"/>
+                                <connections>
+                                    <action selector="createMuralsVisitRouting:" destination="E1Y-BE-rVS" eventType="touchUpInside" id="4TR-yp-jjP"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jaa-ol-hhJ">
                                 <rect key="frame" x="324" y="646" width="70" height="70"/>
                                 <constraints>
@@ -319,11 +336,15 @@
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="bottom" secondItem="LFH-nG-D75" secondAttribute="bottom" constant="20" id="Esb-zE-27q"/>
                             <constraint firstItem="e4r-7u-cEs" firstAttribute="width" secondItem="e4r-7u-cEs" secondAttribute="height" multiplier="1:1" id="G7v-OL-Tnh"/>
                             <constraint firstItem="Jaa-ol-hhJ" firstAttribute="top" secondItem="N9f-11-T93" secondAttribute="bottom" id="LHc-Uy-RsC"/>
+                            <constraint firstItem="nPB-w0-fdk" firstAttribute="top" secondItem="3nZ-aD-0BV" secondAttribute="top" constant="50" id="Lze-dc-mdi"/>
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="bottom" secondItem="Jaa-ol-hhJ" secondAttribute="bottom" constant="20" id="TJT-sn-yhP"/>
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="trailing" secondItem="N9f-11-T93" secondAttribute="trailing" constant="20" id="U88-hl-5jE"/>
                             <constraint firstItem="LFH-nG-D75" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="3nZ-aD-0BV" secondAttribute="leading" constant="20" id="c6Q-w1-J4y"/>
+                            <constraint firstItem="nPB-w0-fdk" firstAttribute="centerX" secondItem="3nZ-aD-0BV" secondAttribute="centerX" id="cRf-bp-Xci"/>
                             <constraint firstItem="e4r-7u-cEs" firstAttribute="centerY" secondItem="3nZ-aD-0BV" secondAttribute="centerY" id="eDA-2i-ksr"/>
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="bottom" secondItem="NTR-xO-WfU" secondAttribute="bottom" id="eHL-YS-gd0"/>
+                            <constraint firstItem="ebp-eu-qjG" firstAttribute="centerX" secondItem="3nZ-aD-0BV" secondAttribute="centerX" id="f2Z-hv-zgP"/>
+                            <constraint firstItem="ebp-eu-qjG" firstAttribute="top" secondItem="nPB-w0-fdk" secondAttribute="bottom" constant="20" id="fZK-mK-1sy"/>
                             <constraint firstItem="e4r-7u-cEs" firstAttribute="width" secondItem="e4r-7u-cEs" secondAttribute="height" multiplier="1:1" id="h24-NB-OQc"/>
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="trailing" secondItem="NTR-xO-WfU" secondAttribute="trailing" id="jSC-MH-Lpt"/>
                             <constraint firstItem="CFe-6N-tkt" firstAttribute="trailing" secondItem="Jaa-ol-hhJ" secondAttribute="trailing" constant="20" id="rBb-BC-cCY"/>
@@ -338,6 +359,8 @@
                         <outlet property="compassView" destination="N9f-11-T93" id="k5C-OI-Tdl"/>
                         <outlet property="mapView" destination="NTR-xO-WfU" id="2Q0-6J-X2N"/>
                         <outlet property="menuButton" destination="Jaa-ol-hhJ" id="ibY-vI-Lk5"/>
+                        <outlet property="numberMuralLabel" destination="nPB-w0-fdk" id="dfW-PK-4wA"/>
+                        <outlet property="timeVisitLabel" destination="ebp-eu-qjG" id="Bfl-Sa-Apt"/>
                         <outlet property="typeMenuViewWidhContraint" destination="77O-Vm-p6U" id="7ag-bo-ivv"/>
                         <outlet property="typeView" destination="LFH-nG-D75" id="LNj-yH-87Q"/>
                     </connections>
