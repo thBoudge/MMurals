@@ -18,7 +18,6 @@
 		1411AE1722DF79C400FD9537 /* MuralPersistentData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411AE1622DF79C400FD9537 /* MuralPersistentData.swift */; };
 		141CB1BE230C821000C6A970 /* MuralAnnotationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */; };
 		141CB1C0230C88FF00C6A970 /* DistanceLocationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */; };
-		142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142FAAAB22F8D7330073A785 /* RoutingViewController.swift */; };
 		1437B8FE22DE28D80073A8D2 /* Mural.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B8FD22DE28D80073A8D2 /* Mural.swift */; };
 		1437B90F22DE35FE0073A8D2 /* URLSessionFake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1437B90E22DE35FE0073A8D2 /* URLSessionFake.swift */; };
 		1437B91122DE365A0073A8D2 /* MontrealPublicMurals.json in Resources */ = {isa = PBXBuildFile; fileRef = 1437B91022DE365A0073A8D2 /* MontrealPublicMurals.json */; };
@@ -29,15 +28,15 @@
 		1474EBA42331C8E6007899D6 /* AnimationMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EBA32331C8E6007899D6 /* AnimationMethods.swift */; };
 		1474EBA62331CB33007899D6 /* MuralVCDelegateMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EBA52331CB33007899D6 /* MuralVCDelegateMethods.swift */; };
 		1474EBA82331CDF9007899D6 /* MuralVCVisitMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EBA72331CDF9007899D6 /* MuralVCVisitMethods.swift */; };
+		1474EBAA2331D755007899D6 /* MuralVCOverlayMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EBA92331D755007899D6 /* MuralVCOverlayMethods.swift */; };
+		1474EBAC2331EB04007899D6 /* MuralVCAnimatedRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1474EBAB2331EB04007899D6 /* MuralVCAnimatedRoute.swift */; };
 		14A719972331154C003A3F86 /* MuralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A719962331154C003A3F86 /* MuralViewController.swift */; };
 		14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855EF231486B5008CF5B7 /* LocationManager.swift */; };
 		14A855F423148715008CF5B7 /* MockLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F323148715008CF5B7 /* MockLocationManager.swift */; };
 		14A855F6231487DE008CF5B7 /* LocationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */; };
 		14D5547422E75B1100A1F2BC /* MuralRealmTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */; };
-		14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14D646F62307423900E5F4D9 /* CompassViewController.swift */; };
 		14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56B22F344860006A793 /* MuralAnnotationView.swift */; };
 		14DCB56E22F348900006A793 /* ClusterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DCB56D22F348900006A793 /* ClusterView.swift */; };
-		14F75BD122F231D10034D6F1 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F75BD022F231D10034D6F1 /* MapViewController.swift */; };
 		14F75BD322F24A890034D6F1 /* MuralAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */; };
 		B209926BA6E737BAAF586E84 /* Pods_MMuralsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79CD9654F8F72AC90E332A4C /* Pods_MMuralsTests.framework */; };
 		BD891F4AC5A82E894546F928 /* Pods_MMurals.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47708D128264C30E324FDF57 /* Pods_MMurals.framework */; };
@@ -68,7 +67,6 @@
 		1411AE1622DF79C400FD9537 /* MuralPersistentData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralPersistentData.swift; sourceTree = "<group>"; };
 		141CB1BD230C821000C6A970 /* MuralAnnotationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationTests.swift; sourceTree = "<group>"; };
 		141CB1BF230C88FF00C6A970 /* DistanceLocationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DistanceLocationTests.swift; sourceTree = "<group>"; };
-		142FAAAB22F8D7330073A785 /* RoutingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutingViewController.swift; sourceTree = "<group>"; };
 		1437B8FD22DE28D80073A8D2 /* Mural.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mural.swift; sourceTree = "<group>"; };
 		1437B90422DE355E0073A8D2 /* MMuralsTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MMuralsTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1437B90822DE355E0073A8D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -81,15 +79,15 @@
 		1474EBA32331C8E6007899D6 /* AnimationMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationMethods.swift; sourceTree = "<group>"; };
 		1474EBA52331CB33007899D6 /* MuralVCDelegateMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralVCDelegateMethods.swift; sourceTree = "<group>"; };
 		1474EBA72331CDF9007899D6 /* MuralVCVisitMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralVCVisitMethods.swift; sourceTree = "<group>"; };
+		1474EBA92331D755007899D6 /* MuralVCOverlayMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralVCOverlayMethods.swift; sourceTree = "<group>"; };
+		1474EBAB2331EB04007899D6 /* MuralVCAnimatedRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralVCAnimatedRoute.swift; sourceTree = "<group>"; };
 		14A719962331154C003A3F86 /* MuralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralViewController.swift; sourceTree = "<group>"; };
 		14A855EF231486B5008CF5B7 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		14A855F323148715008CF5B7 /* MockLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockLocationManager.swift; sourceTree = "<group>"; };
 		14A855F5231487DE008CF5B7 /* LocationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationServiceTests.swift; sourceTree = "<group>"; };
 		14D5547322E75B1100A1F2BC /* MuralRealmTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralRealmTests.swift; sourceTree = "<group>"; };
-		14D646F62307423900E5F4D9 /* CompassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompassViewController.swift; sourceTree = "<group>"; };
 		14DCB56B22F344860006A793 /* MuralAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotationView.swift; sourceTree = "<group>"; };
 		14DCB56D22F348900006A793 /* ClusterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClusterView.swift; sourceTree = "<group>"; };
-		14F75BD022F231D10034D6F1 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		14F75BD222F24A890034D6F1 /* MuralAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuralAnnotation.swift; sourceTree = "<group>"; };
 		47708D128264C30E324FDF57 /* Pods_MMurals.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MMurals.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79BD27500672BDF17693901C /* Pods-MMurals.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MMurals.release.xcconfig"; path = "Target Support Files/Pods-MMurals/Pods-MMurals.release.xcconfig"; sourceTree = "<group>"; };
@@ -154,14 +152,8 @@
 		140D44C622D93DC00057F434 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				14F75BD022F231D10034D6F1 /* MapViewController.swift */,
-				14D646F62307423900E5F4D9 /* CompassViewController.swift */,
-				142FAAAB22F8D7330073A785 /* RoutingViewController.swift */,
 				14A719962331154C003A3F86 /* MuralViewController.swift */,
-				1474EBA12331C09F007899D6 /* MapSepcificity.swift */,
-				1474EBA32331C8E6007899D6 /* AnimationMethods.swift */,
-				1474EBA52331CB33007899D6 /* MuralVCDelegateMethods.swift */,
-				1474EBA72331CDF9007899D6 /* MuralVCVisitMethods.swift */,
+				14EF1C112337CBAB00D6C592 /* MuralViewControllerExtensions */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -248,6 +240,19 @@
 				14A855EF231486B5008CF5B7 /* LocationManager.swift */,
 			);
 			path = Location;
+			sourceTree = "<group>";
+		};
+		14EF1C112337CBAB00D6C592 /* MuralViewControllerExtensions */ = {
+			isa = PBXGroup;
+			children = (
+				1474EBA12331C09F007899D6 /* MapSepcificity.swift */,
+				1474EBA32331C8E6007899D6 /* AnimationMethods.swift */,
+				1474EBA52331CB33007899D6 /* MuralVCDelegateMethods.swift */,
+				1474EBA72331CDF9007899D6 /* MuralVCVisitMethods.swift */,
+				1474EBA92331D755007899D6 /* MuralVCOverlayMethods.swift */,
+				1474EBAB2331EB04007899D6 /* MuralVCAnimatedRoute.swift */,
+			);
+			path = MuralViewControllerExtensions;
 			sourceTree = "<group>";
 		};
 		5241C526569D43AC18153ECD /* Frameworks */ = {
@@ -497,9 +502,8 @@
 				14069E2122FB6E80009A413F /* DistanceLocation.swift in Sources */,
 				14A855F0231486B5008CF5B7 /* LocationManager.swift in Sources */,
 				140D44D222D9426F0057F434 /* MuralsService.swift in Sources */,
-				14D646F72307423900E5F4D9 /* CompassViewController.swift in Sources */,
 				140D44D022D940830057F434 /* ApiKeys.swift in Sources */,
-				142FAAAC22F8D7330073A785 /* RoutingViewController.swift in Sources */,
+				1474EBAA2331D755007899D6 /* MuralVCOverlayMethods.swift in Sources */,
 				140D44B522D9390B0057F434 /* AppDelegate.swift in Sources */,
 				14DCB56C22F344860006A793 /* MuralAnnotationView.swift in Sources */,
 				1474EBA22331C09F007899D6 /* MapSepcificity.swift in Sources */,
@@ -511,7 +515,7 @@
 				1474EBA42331C8E6007899D6 /* AnimationMethods.swift in Sources */,
 				1411AE1722DF79C400FD9537 /* MuralPersistentData.swift in Sources */,
 				1474EBA82331CDF9007899D6 /* MuralVCVisitMethods.swift in Sources */,
-				14F75BD122F231D10034D6F1 /* MapViewController.swift in Sources */,
+				1474EBAC2331EB04007899D6 /* MuralVCAnimatedRoute.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

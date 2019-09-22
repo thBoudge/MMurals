@@ -16,6 +16,14 @@ extension MuralViewController: MKMapViewDelegate{
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         MuralAnnotationView.didSelectAnnotation(view: view, pointArray: muralAnnotationList )
     }
+    
+    // Create a renderer
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay as! MKPolyline)
+        renderer.strokeColor = .purple
+        renderer.lineWidth = 5
+        return renderer
+    }
 }
 
 // MARK: - LocationServiceDelegate Extension

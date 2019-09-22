@@ -15,10 +15,10 @@ extension MuralViewController {
     
     /// Show or Close menu with an animation
     func showOrHideMenu(){
-        menuIsOpen = !menuIsOpen
-        compassMenuViewheightContraint.constant = menuIsOpen ? 260 : 0
-        typeMenuViewWidhContraint.constant = menuIsOpen ? 260 : 0
-        animateOpenCloseMenuButton(menuIsOpen: menuIsOpen)
+        menuIsClose = !menuIsClose
+        compassMenuViewheightContraint.constant = menuIsClose ? 260 : 0
+        typeMenuViewWidhContraint.constant = menuIsClose ? 260 : 0
+        animateOpenCloseMenuButton(menuIsOpen: menuIsClose)
     }
     
     /// methods that animate menuButton
@@ -31,7 +31,7 @@ extension MuralViewController {
             options: .allowUserInteraction,
             animations: {
                 // Rotation of menuButton + to X
-                let angle: CGFloat = self.menuIsOpen ? .pi / 4 : 0.0
+                let angle: CGFloat = self.menuIsClose ? .pi / 4 : 0.0
                 
                 self.menuButton.transform = CGAffineTransform(rotationAngle: angle)
                 self.view.layoutIfNeeded() // we update change

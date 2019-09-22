@@ -38,8 +38,10 @@ extension MuralViewController {
             regionRadius = 5000.0
             mapMapViewIsAllowed()
         case 3:
+            regionRadius = 2000.0
+            compassDirectionButton.alpha = 0
+            centerLocation()
             visitMapViewIsAllowed()
-            break
         default:
             break
         }
@@ -86,6 +88,7 @@ extension MuralViewController {
     
     /// mapView specification when we press OnedrectionButtom
     func visitMapViewIsAllowed(){
+        mapView.removeAnnotations(muralAnnotationList)
         mapView.isRotateEnabled = true
         mapView.isScrollEnabled = true
         mapView.isZoomEnabled = true

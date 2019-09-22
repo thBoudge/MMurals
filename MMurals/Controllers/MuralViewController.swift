@@ -35,9 +35,12 @@ class MuralViewController: UIViewController {
     var regionRadius: CLLocationDistance = 3000.0
     var muralAnnotationList : [MuralAnnotation] = [] // create a list of MuralAnnotation
     let appDelegate = AppDelegate() // Alert Load data
-    var menuIsOpen = false  // inform if mainMenu is open or close
+    var menuIsClose = false  // inform if mainMenu is open or close
     var mapToAppear = 0 // inform which map specificity need to appear
     let distanceLocation = DistanceLocation()
+    var drawingTimer: Timer?
+//    var polyline = MKPolyline()
+    
     
     // MARK: - ViewDidLoad
     
@@ -61,6 +64,7 @@ class MuralViewController: UIViewController {
         }
     }
     
+    
     // MARK: - ABAction
     
     @IBAction func openCloseMenu(_ sender: UIButton) {
@@ -68,18 +72,15 @@ class MuralViewController: UIViewController {
     }
     
     @IBAction func compassOneDirectionOpen(_ sender: UIButton) {
-        mapToAppear =  0
-        mapImplementation(mapCode: mapToAppear)
+        openNewMapView(map: 0)
     }
     
     @IBAction func compassAllAroundOpen(_ sender: UIButton) {
-        mapToAppear =  1
-        mapImplementation(mapCode: mapToAppear)
+        openNewMapView(map: 1)
     }
     
     @IBAction func fullMapOpen(_ sender: UIButton) {
-        mapToAppear =  2
-        mapImplementation(mapCode: mapToAppear)
+        openNewMapView(map: 2)
     }
     
     @IBAction func changeMapType(_ sender: UIButton) {
@@ -99,7 +100,18 @@ class MuralViewController: UIViewController {
     }
     
     @IBAction func createMuralsVisitRouting(_ sender: UIButton) {
-        
+        if numberMuralLabel.text == "Murals: none"{
+            alertOn(name: "Sorry, There are no Murals on this direction.", description:  "Please try again or look on the map where is the nearest Murals")
+        } else{
+        mapView.removeAnnotations(muralAnnotationList)
+        muralAnnotationList = muralsVisitList()
+        mapToAppear =  3
+        mapImplementation(mapCode: mapToAppear)
+        mapView.addAnnotations(muralAnnotationList)
+        getDirections(sortedLocations: muralAnnotationList)
+        menuIsClose = true
+        showOrHideMenu()
+        }
     }
     
     
@@ -122,6 +134,21 @@ class MuralViewController: UIViewController {
         mapView.addAnnotations(self.muralAnnotationList)
         mapView.register(MuralAnnotationView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultAnnotationViewReuseIdentifier)
         mapView.register(ClusterView.self, forAnnotationViewWithReuseIdentifier: MKMapViewDefaultClusterAnnotationViewReuseIdentifier)
+    }
+    
+    func openNewMapView(map: Int){
+        if mapToAppear == 3 {
+            mapView.removeAnnotations(muralAnnotationList)
+            mapView.removeOverlays(mapView.overlays)
+            muralAnnotationList.removeAll()
+            mapToAppear = map
+            self.viewWillAppear(true)
+            menuIsClose = false
+            showOrHideMenu()
+        } else {
+            mapToAppear = map
+            mapImplementation(mapCode: mapToAppear)
+        }
     }
     
 }
